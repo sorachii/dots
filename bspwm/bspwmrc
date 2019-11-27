@@ -22,7 +22,7 @@ bspc config gapless_monocle      true
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Firefox desktop='^1'
-bspc rule -a qBittorrent desktop='^8' follow=off state=tiled
+bspc rule -a qBittorrent desktop='^10' follow=off state=tiled
 bspc rule -a discord desktop='^9'follow=off
 bspc rule -a kitty
 bspc rule -a vlc follow=on desktop='^4'
