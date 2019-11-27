@@ -1,36 +1,49 @@
 call plug#begin('~/.vim/plugged')
-"cosmetics
-Plug 'ayu-theme/ayu-vim'
-Plug 'itchyny/lightline.vim'
-Plug 'shinchu/lightline-seoul256.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/seoul256.vim'
-Plug 'gko/vim-coloresque'
-"code
-Plug '~/.vim/plugged/vim-love-docs'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'junegunn/fzf.vim'
-Plug 'w0rp/ale'
-Plug 'Robzz/deoplete-omnisharp'
-Plug 'tpope/vim-surround'
-Plug 'vim-syntastic/syntastic'
-Plug 'xolox/vim-lua-ftplugin'
-Plug 'Shougo/neopairs.vim'
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
+    "cosmetics
+        Plug 'ayu-theme/ayu-vim'
+        Plug 'itchyny/lightline.vim'
+        Plug 'shinchu/lightline-seoul256.vim'
+        Plug 'junegunn/goyo.vim'
+        Plug 'junegunn/seoul256.vim'
+        Plug 'gko/vim-coloresque'
+    "code
+        Plug '~/.vim/plugged/vim-love-docs'     "LÖVE completion
+        Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+        Plug 'junegunn/fzf.vim'                 "fuzzy search
+        Plug 'w0rp/ale'                         "error check
+        Plug 'tpope/vim-surround'
+        Plug 'vim-syntastic/syntastic'          "for error checking
+        Plug 'xolox/vim-lua-ftplugin'           "lua completion maybe
+        Plug 'xolox/vim-misc'                   "xolox's scripts to work with his other plugins
+        Plug 'Shougo/neopairs.vim'              "supposedly auto pair
+        if has('nvim')
+            Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        else
+            Plug 'Shougo/deoplete.nvim'
+            Plug 'roxma/nvim-yarp'
+            Plug 'roxma/vim-hug-neovim-rpc'
+        endif
 call plug#end()
-
-
-
-
 filetype plugin indent on
 
 let g:deoplete#enable_at_startup = 1
+
+
+"deoplete-vim-lua-ftplugin START
+    let g:lua_check_syntax = 0
+    let g:lua_complete_omni = 1
+    let g:lua_complete_dynamic = 0
+    let g:lua_define_completion_mappings = 0
+
+    call deoplete#custom#var('omni', 'functions', {
+                \ 'lua': 'xolox#lua#omnifunc',
+                \ })
+    call deoplete#custom#var('omni', 'input_patterns', {
+                \ 'lua': '\w+|\w+[.:]\w*',
+                \ })
+"END
+
+
 let g:lightline = {
             \ 'colorscheme': 'seoul256',
             \ }
@@ -62,6 +75,7 @@ set softtabstop=4           "number of spaces in tab when editing
 set expandtab smarttab      "tabs are spaces
 set relativenumber          "show relative line numbers
 set number
+set hidden                  "keep buffer changes and lets me jump between buffers
 set wildmenu                "visual autocomplete for command menu
 set lazyredraw              "redraw only when we need to
 set showmatch               "highlight matching [{()}]
