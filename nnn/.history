@@ -1,0 +1,5 @@
+echo $SHELL
+nvim setcolors.vim
+sudo nvim setcolors.vim
+sudo cp setcolors.vim ~/.config/nvim/
+love

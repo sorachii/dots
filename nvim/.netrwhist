@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/usr/include'
+let g:netrw_dirhist_4='/home/tensaii/dots'
+let g:netrw_dirhist_3='/home/tensaii/.config/kitty'
+let g:netrw_dirhist_2='/home/tensaii/.config'
+let g:netrw_dirhist_1='/home/tensaii/.config/kitty'
