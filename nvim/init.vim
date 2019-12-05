@@ -49,7 +49,7 @@ let g:deoplete#enable_at_startup = 1
 
 
 let g:lightline = {
-            \ 'colorscheme': 'seoul256',
+            \ 'colorscheme': 'wombat',
             \ }
 
 let &t_ut=''                "asszem colorscheme tearinget állítja be vagy ez vagy pedig valami kitty.conf-ban
