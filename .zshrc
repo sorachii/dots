@@ -19,3 +19,5 @@ export PAGER=less
 export VISUAL=$EDITOR
 export TERMINAL=kitty
 alias n=nnn
+alias take=mkdir project1 && cd "$_"
+#kitty -e nnn
