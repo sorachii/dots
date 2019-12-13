@@ -4,7 +4,7 @@
 call plug#begin('~/.config/nvim/plugged')
     "cosmetics
         Plug 'fxn/vim-monochrome'               "monochrome colorscheme
-        Plug 'Jorengarenar/vim-darkness'        "monochrome colorscheme
+        Plug 'andreypopp/vim-colors-plain'      "another monocolor
         Plug 'https://github.com/chriskempson/base16-vim.git'
         Plug 'ayu-theme/ayu-vim'
         Plug 'itchyny/lightline.vim'
@@ -15,6 +15,7 @@ call plug#begin('~/.config/nvim/plugged')
     "code
         "Plug '~/.vim/plugged/vim-love-docs'     "LÖVE completion
         Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+        Plug 'artur-shaik/vim-javacomplete2'    "java completion for deoplete
         Plug 'junegunn/fzf.vim'                 "fuzzy search
         Plug 'w0rp/ale'                         "error check
         Plug 'tpope/vim-surround'
@@ -32,6 +33,16 @@ call plug#end()
 filetype plugin indent on
 
 let g:deoplete#enable_at_startup = 1
+
+"javacomplete2 stuff
+    let g:deoplete#omni_patterns = {}
+    let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+    let g:deoplete#sources = {}
+    let g:deoplete#sources._ = []
+    let g:deoplete#file#enable_buffer_path = 1
+    if !exists('g:deoplete#omni#input_patterns')
+        let g:deoplete#omni#input_patterns = {}
+    endif
 
 
 "deoplete-vim-lua-ftplugin START
@@ -54,7 +65,8 @@ let g:lightline = {
             \ }
 
 let &t_ut=''                "asszem colorscheme tearinget állítja be vagy ez vagy pedig valami kitty.conf-ban
-colorscheme monochrome
+set background=dark     "for monochrome plain -- you can also set it to light
+colorscheme plain
 "colorscheme seoul256-light
 "colorscheme ayu
 "let ayucolor="light"
