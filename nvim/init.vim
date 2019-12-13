@@ -3,6 +3,8 @@
 
 call plug#begin('~/.config/nvim/plugged')
     "cosmetics
+        Plug 'fxn/vim-monochrome'               "monochrome colorscheme
+        Plug 'Jorengarenar/vim-darkness'        "monochrome colorscheme
         Plug 'https://github.com/chriskempson/base16-vim.git'
         Plug 'ayu-theme/ayu-vim'
         Plug 'itchyny/lightline.vim'
@@ -19,7 +21,6 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'vim-syntastic/syntastic'          "for error checking
         Plug 'xolox/vim-lua-ftplugin'           "lua completion maybe
         Plug 'xolox/vim-misc'                   "xolox's scripts to work with his other plugins
-        Plug 'Shougo/neopairs.vim'              "supposedly auto pair
         if has('nvim')
             Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
         else
@@ -53,7 +54,7 @@ let g:lightline = {
             \ }
 
 let &t_ut=''                "asszem colorscheme tearinget állítja be vagy ez vagy pedig valami kitty.conf-ban
-colorscheme wombat256mod
+colorscheme monochrome
 "colorscheme seoul256-light
 "colorscheme ayu
 "let ayucolor="light"
