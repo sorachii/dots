@@ -1,8 +1,0 @@
-g:neopairs#enable	neopairs.txt	/*g:neopairs#enable*
-g:neopairs#pairs	neopairs.txt	/*g:neopairs#pairs*
-neopairs-contents	neopairs.txt	/*neopairs-contents*
-neopairs-faq	neopairs.txt	/*neopairs-faq*
-neopairs-install	neopairs.txt	/*neopairs-install*
-neopairs-interface	neopairs.txt	/*neopairs-interface*
-neopairs-variables	neopairs.txt	/*neopairs-variables*
-neopairs.txt	neopairs.txt	/*neopairs.txt*
