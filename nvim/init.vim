@@ -236,6 +236,7 @@ inoremap (\ (<CR>)<C-c>O
 inoremap {\ {<CR>}<C-c>O
 inoremap [\ [<CR>]<C-c>O
 inoremap func\ function() {<CR>}<C-c>O
+inoremap HTML! <!DOCTYPE html><CR><tab><head><CR><tab><tab><title>SITE</title><CR><tab></head><CR><tab><body><CR><CR><tab><tab></body><CR></html>
 
 "toggle nerdTree
 map <C-n> :NERDTreeToggle<CR>   

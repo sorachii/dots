@@ -19,5 +19,19 @@ export PAGER=less
 export VISUAL=$EDITOR
 export TERMINAL=kitty
 alias n=nnn
-alias take=mkdir project1 && cd "$_"
+alias take=mkdir && cd $1
+alias html=~/code/script/html
 #kitty -e nnn
+
+#FZF OPEN#
+fo() {
+    cd ~ && xdg-open `fzf`
+}
+
+#FZF CD#
+fcd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
