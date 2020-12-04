@@ -29,6 +29,7 @@ colorscheme gruvbox
 
 set rtp+=/usr/bin/fzf
 let &t_ut=''
+set paste                   "somehow makes pasting not that junk
 set ruler
 set encoding=utf-8
 set termguicolors           "enable true colors support
