@@ -52,7 +52,7 @@ set foldlevelstart=10       "open most folds by default
 set foldnestmax=10          "10 nested fold max
 set foldmethod=manual       "fold based on indent level
 set noswapfile
-set colorcolumn=80
+"set colorcolumn=80
 let g:sneak#label = 1       "make sneak even greater
 
 nnoremap <SPACE> <Nop>
