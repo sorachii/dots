@@ -20,11 +20,7 @@ call minpac#add('plasticboy/vim-markdown')                                  "mar
 
 call minpac#add('scrooloose/nerdtree', { 'on':  'NERDTreeToggle' })         "file explorer
 
-
 colorscheme gruvbox
-
-" Load the plugins right now. (optional)
-" packloadall
 
 set rtp+=/usr/bin/fzf
 let &t_ut=''
@@ -53,10 +49,12 @@ set foldmethod=manual       "fold based on indent level
 set noswapfile
 let g:sneak#label = 1       "make sneak even greater
 
-let g:jedi#use_splits_not_buffers = "right"
 nnoremap <SPACE> <Nop>
+" mapping space to be leader key
 let mapleader = " "
+" double pressing leader alternates between previously opened buffer
 nnoremap <Leader><Leader> <C-^>
+
 nnoremap j gj
 nnoremap k gk
 
@@ -65,11 +63,13 @@ nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <leader>f :FZF<cr>
 nnoremap <silent> <leader>F :FZF ~<cr>
 
+"toggle nerdTree
+map <C-n> :NERDTreeToggle<CR>
+
 " Define user commands for updating/cleaning the plugins.
 " Each of them loads minpac, reloads .vimrc to register the
 " information of plugins, then performs the task.
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 command! PackStatus packadd minpac | source $MYVIMRC | call minpac#status()
-"toggle nerdTree
-map <C-n> :NERDTreeToggle<CR>
+command! Cleanshit g/^$/d
