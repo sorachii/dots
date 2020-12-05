@@ -12,6 +12,9 @@ call minpac#add('justinmk/vim-sneak')                                       "fav
 call minpac#add('tpope/vim-surround')
 call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'})
 call minpac#add('junegunn/fzf.vim')
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('jiangmiao/auto-pairs')
+
 "call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 
 " Markdown stuff
@@ -21,6 +24,7 @@ call minpac#add('plasticboy/vim-markdown')                                  "mar
 call minpac#add('scrooloose/nerdtree', { 'on':  'NERDTreeToggle' })         "file explorer
 
 colorscheme gruvbox
+set background=dark
 set rtp+=/usr/bin/fzf
 let &t_ut=''
 set paste                   "somehow makes pasting not that junk
@@ -46,6 +50,7 @@ set foldlevelstart=10       "open most folds by default
 set foldnestmax=10          "10 nested fold max
 set foldmethod=manual       "fold based on indent level
 set noswapfile
+set colorcolumn=80
 let g:sneak#label = 1       "make sneak even greater
 
 nnoremap <SPACE> <Nop>
