@@ -8,11 +8,11 @@ call minpac#add('morhetz/gruvbox')                                          "col
 call minpac#add('chriskempson/base16-vim')                                  "colorscheme collection
 call minpac#add('justinmk/vim-sneak')                                       "fav motion
 "call minpac#add('davidhalter/jedi-vim')                                     "python completion
+"call minpac#add('dense-analysis/ale')
 call minpac#add('tpope/vim-surround')
 call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'})
 call minpac#add('junegunn/fzf.vim')
-call minpac#add('dense-analysis/ale')
-" call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
+call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 
 " Markdown stuff
 call minpac#add('godlygeek/tabular')                                        "tab help
@@ -64,18 +64,6 @@ nnoremap k gk
 nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <leader>f :FZF<cr>
 nnoremap <silent> <leader>F :FZF ~<cr>
-
-" ALE CONFIGURATION
-let g:ale_fixers = {
-            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-            \   'javascript': ['eslint'],
-            \   'yaml': ['yamllint'],
-            \   'python': ['black'],
-            \ }
-
-let g:ale_completion_enabled = 1
-let g:ale_lint_on_text_changed = 1
-let g:ale_linters = {'yaml': ['yamllint'], 'python': ['flake8']}
 
 " Define user commands for updating/cleaning the plugins.
 " Each of them loads minpac, reloads .vimrc to register the
