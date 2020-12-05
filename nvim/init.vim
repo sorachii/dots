@@ -70,5 +70,4 @@ map <C-n> :NERDTreeToggle<CR>
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 command! PackStatus packadd minpac | source $MYVIMRC | call minpac#status()
-
 command! Cleanshit g/^$/d
