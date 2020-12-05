@@ -14,6 +14,8 @@ call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'})
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('jiangmiao/auto-pairs')
+call minpac#add('machakann/vim-highlightedyank')
+
 
 "call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 
@@ -61,6 +63,9 @@ nnoremap <Leader><Leader> <C-^>
 
 nnoremap j gj
 nnoremap k gk
+
+" YANK HIGHLIGHT SETTING
+let g:highlightedyank_highlight_duration = 100
 
 " FZF MAPPING
 nnoremap <silent> <leader>b :Buffers<cr>
