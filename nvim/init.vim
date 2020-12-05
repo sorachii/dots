@@ -12,7 +12,7 @@ call minpac#add('justinmk/vim-sneak')                                       "fav
 call minpac#add('tpope/vim-surround')
 call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'})
 call minpac#add('junegunn/fzf.vim')
-call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
+"call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 
 " Markdown stuff
 call minpac#add('godlygeek/tabular')                                        "tab help
@@ -21,7 +21,6 @@ call minpac#add('plasticboy/vim-markdown')                                  "mar
 call minpac#add('scrooloose/nerdtree', { 'on':  'NERDTreeToggle' })         "file explorer
 
 colorscheme gruvbox
-
 set rtp+=/usr/bin/fzf
 let &t_ut=''
 set paste                   "somehow makes pasting not that junk
