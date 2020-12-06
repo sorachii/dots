@@ -1,5 +1,6 @@
 set nocompatible
 packadd minpac
+"packadd nvim-lspconfig
 call minpac#init()
 
 " minpac must have {'type': 'opt'} so that it can be loaded with `packadd`.
@@ -16,6 +17,8 @@ call minpac#add('junegunn/fzf.vim')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('machakann/vim-highlightedyank')
+"call minpac#add('neovim/nvim-lspconfig', {'type': 'opt'})
+
 
 " Markdown stuff
 call minpac#add('godlygeek/tabular')                                        "tab help
@@ -24,10 +27,10 @@ call minpac#add('plasticboy/vim-markdown')                                  "mar
 colorscheme gruvbox
 set background=dark
 set rtp+=/usr/bin/fzf
+set rtp+=/home/megaman/git/neovim/runtime/lua/vim
 let &t_ut=''
 set updatetime=1000
 set scrolloff=5             "make it so there are always ten lines below my cursor
-set paste                   "somehow makes pasting not that junk but :checkhealth throws errors cuz of it
 set ignorecase              "better search options
 set smartcase
 set splitright              "prefer windows splitting to the right
@@ -64,7 +67,6 @@ nnoremap <SPACE> <Nop>
 let mapleader = " "
 " double pressing leader alternates between previously opened buffer
 nnoremap <Leader><Leader> <C-^>
-
 nnoremap j gj
 nnoremap k gk
 
