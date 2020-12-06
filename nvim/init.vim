@@ -9,6 +9,7 @@ call minpac#add('chriskempson/base16-vim')                                  "col
 call minpac#add('justinmk/vim-sneak')                                       "fav motion
 "call minpac#add('davidhalter/jedi-vim')                                     "python completion
 "call minpac#add('dense-analysis/ale')
+"call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 call minpac#add('tpope/vim-surround')
 call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'})
 call minpac#add('junegunn/fzf.vim')
@@ -16,14 +17,9 @@ call minpac#add('tpope/vim-fugitive')
 call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('machakann/vim-highlightedyank')
 
-
-"call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
-
 " Markdown stuff
 call minpac#add('godlygeek/tabular')                                        "tab help
 call minpac#add('plasticboy/vim-markdown')                                  "markdown
-
-call minpac#add('scrooloose/nerdtree', { 'on':  'NERDTreeToggle' })         "file explorer
 
 colorscheme gruvbox
 set background=dark
@@ -71,9 +67,6 @@ let g:highlightedyank_highlight_duration = 100
 nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <leader>f :FZF<cr>
 nnoremap <silent> <leader>F :FZF ~<cr>
-
-"toggle nerdTree
-map <C-n> :NERDTreeToggle<CR>
 
 " CUSTOM COMMANDS
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
