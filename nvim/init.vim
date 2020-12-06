@@ -25,8 +25,17 @@ colorscheme gruvbox
 set background=dark
 set rtp+=/usr/bin/fzf
 let &t_ut=''
-set paste                   "somehow makes pasting not that junk
-set ruler
+set updatetime=1000
+set scrolloff=5             "make it so there are always ten lines below my cursor
+set paste                   "somehow makes pasting not that junk but :checkhealth throws errors cuz of it
+set ignorecase              "better search options
+set smartcase
+set splitright              "prefer windows splitting to the right
+set splitbelow              "prefer windows splitting below
+set cursorline              "Highlight the screen line of the cursor with CursorLine
+set noequalalways             "When on, all the windows are automatically made the same size after splitting or closing a window.
+set cmdheight=1
+set ruler                   "show the line and column number of the cursor position
 set encoding=utf-8
 set termguicolors           "enable true colors support
 set noautoindent            "no autoindent. obvious
@@ -36,7 +45,7 @@ set softtabstop=4           "number of spaces in tab when editing
 set fileformat=unix
 set expandtab               "tabs are spaces
 set relativenumber          "show relative line numbers
-set number
+set number                  "show number of current line
 set hidden                  "keep buffer changes and lets me jump between buffers
 set wildmenu                "visual autocomplete for command menu
 set lazyredraw              "redraw only when we need to
@@ -48,7 +57,6 @@ set foldlevelstart=10       "open most folds by default
 set foldnestmax=10          "10 nested fold max
 set foldmethod=manual       "fold based on indent level
 set noswapfile
-"set colorcolumn=80
 let g:sneak#label = 1       "make sneak even greater
 
 nnoremap <SPACE> <Nop>
