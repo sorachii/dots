@@ -19,7 +19,6 @@ call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('machakann/vim-highlightedyank')
 "call minpac#add('neovim/nvim-lspconfig', {'type': 'opt'})
 
-
 " Markdown stuff
 call minpac#add('godlygeek/tabular')                                        "tab help
 call minpac#add('plasticboy/vim-markdown')                                  "markdown
