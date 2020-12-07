@@ -78,6 +78,7 @@ set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua <<EOF
 require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.yamlls.setup{on_attach=require'completion'.on_attach}
 EOF
 
 " YANK HIGHLIGHT SETTING
