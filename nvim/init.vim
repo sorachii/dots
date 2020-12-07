@@ -32,13 +32,13 @@ set background=dark
 set rtp+=/usr/bin/fzf
 set rtp+=/home/megaman/git/neovim/runtime/lua/vim
 let &t_ut=''
+set cursorline
 set updatetime=1000
 set scrolloff=5             "make it so there are always ten lines below my cursor
 set ignorecase              "better search options
 set smartcase
 set splitright              "prefer windows splitting to the right
 set splitbelow              "prefer windows splitting below
-set cursorline              "Highlight the screen line of the cursor with CursorLine
 set noequalalways            "When on, all the windows are automatically made the same size after splitting or closing a window.
 set cmdheight=1
 set ruler                   "show the line and column number of the cursor position
