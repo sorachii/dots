@@ -1,6 +1,6 @@
 set nocompatible
 packadd minpac
-"packadd nvim-lspconfig
+packadd nvim-lspconfig
 call minpac#init()
 
 " minpac must have {'type': 'opt'} so that it can be loaded with `packadd`.
@@ -17,12 +17,16 @@ call minpac#add('junegunn/fzf.vim')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('machakann/vim-highlightedyank')
-"call minpac#add('neovim/nvim-lspconfig', {'type': 'opt'})
+call minpac#add('neovim/nvim-lspconfig', {'type': 'opt'})
+call minpac#add('nvim-lua/completion-nvim')
+
 
 " Markdown stuff
 call minpac#add('godlygeek/tabular')                                        "tab help
 call minpac#add('plasticboy/vim-markdown')                                  "markdown
 
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_invert_selection = '0'
 colorscheme gruvbox
 set background=dark
 set rtp+=/usr/bin/fzf
@@ -35,7 +39,7 @@ set smartcase
 set splitright              "prefer windows splitting to the right
 set splitbelow              "prefer windows splitting below
 set cursorline              "Highlight the screen line of the cursor with CursorLine
-set noequalalways             "When on, all the windows are automatically made the same size after splitting or closing a window.
+set noequalalways            "When on, all the windows are automatically made the same size after splitting or closing a window.
 set cmdheight=1
 set ruler                   "show the line and column number of the cursor position
 set encoding=utf-8
@@ -68,6 +72,13 @@ let mapleader = " "
 nnoremap <Leader><Leader> <C-^>
 nnoremap j gj
 nnoremap k gk
+
+" NVIM-LSP CONFIG
+set completeopt=menuone,noinsert,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+lua <<EOF
+require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
+EOF
 
 " YANK HIGHLIGHT SETTING
 let g:highlightedyank_highlight_duration = 100
