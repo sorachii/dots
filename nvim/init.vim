@@ -1,3 +1,13 @@
+" TODO:
+" * configure formatting to some key-binding optimally formatprg would handle it
+"   with 'gq' key combo
+"   ** solution 1.) bind `:!python3 -m black %` to something
+"       cheap solution cuz formats everything and can't give <,> range to it
+"   ** solution 2.) format by invoking lsp-client on key-binding
+"   ** solution 3.) invoke formatprg on keypress for range
+" * find solution to the junk pasting from not vim native clipboard(<CS-v>)
+"   ':h formatoptions' might be helpful
+
 set nocompatible
 packadd minpac
 packadd nvim-lspconfig
@@ -94,3 +104,4 @@ command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 command! PackStatus packadd minpac | source $MYVIMRC | call minpac#status()
 command! Cleanshit g/^$/d
+command! Format lua vim.lsp.buf.formatting_sync()
