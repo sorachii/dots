@@ -104,4 +104,4 @@ command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 command! PackStatus packadd minpac | source $MYVIMRC | call minpac#status()
 command! Cleanshit g/^$/d
-command! Format lua vim.lsp.buf.formatting_sync()
+command! Format lua vim.lsp.buf.formatting()
