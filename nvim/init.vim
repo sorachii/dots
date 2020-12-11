@@ -16,6 +16,7 @@ call minpac#init()
 " minpac must have {'type': 'opt'} so that it can be loaded with `packadd`.
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('morhetz/gruvbox')                                          "colorscheme
+call minpac#add('junegunn/seoul256.vim')                                    "colorscheme
 call minpac#add('chriskempson/base16-vim')                                  "colorscheme collection
 call minpac#add('justinmk/vim-sneak')                                       "fav motion
 "call minpac#add('davidhalter/jedi-vim')                                     "python completion
@@ -35,9 +36,7 @@ call minpac#add('nvim-lua/completion-nvim')
 call minpac#add('godlygeek/tabular')                                        "tab help
 call minpac#add('plasticboy/vim-markdown')                                  "markdown
 
-let g:gruvbox_contrast_dark = 'medium'
-let g:gruvbox_invert_selection = '0'
-colorscheme gruvbox
+colorscheme seoul256
 set background=dark
 set rtp+=/usr/bin/fzf
 set rtp+=/home/megaman/git/neovim/runtime/lua/vim
