@@ -36,12 +36,12 @@ call minpac#add('nvim-lua/completion-nvim')
 call minpac#add('godlygeek/tabular')                                        "tab help
 call minpac#add('plasticboy/vim-markdown')                                  "markdown
 
+let g:seoul256_background = 236
 colorscheme seoul256
 set background=dark
 set rtp+=/usr/bin/fzf
 set rtp+=/home/megaman/git/neovim/runtime/lua/vim
 let &t_ut=''
-set cursorline
 set updatetime=1000
 set scrolloff=5             "make it so there are always ten lines below my cursor
 set ignorecase              "better search options
