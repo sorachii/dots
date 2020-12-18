@@ -117,14 +117,10 @@ source $ZSH/oh-my-zsh.sh
 alias fd="/usr/bin/fdfind"
 alias v="nvim"
 alias n="nnn"
-
 alias vim="nvim"
 alias less="bat"
 alias ccat="bat"
 alias config="/usr/bin/git --git-dir=$HOME/git/dots/ --work-tree=$HOME"
 alias vf="nvim (fzf --height 40% --reverse)"
-
-
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
