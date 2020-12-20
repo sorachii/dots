@@ -1,12 +1,4 @@
 " TODO:
-" * configure formatting to some key-binding optimally formatprg would handle it
-"   with 'gq' key combo
-"   ** solution 1.) bind `:!python3 -m black %` to something
-"       cheap solution cuz formats everything and can't give <,> range to it
-"   ** solution 2.) format by invoking lsp-client on key-binding
-"   ** solution 3.) invoke formatprg on keypress for range
-" * find solution to the junk pasting from not vim native clipboard(<CS-v>)
-"   ':h formatoptions' might be helpful
 
 set nocompatible
 packadd minpac
@@ -101,6 +93,7 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gq    <cmd>lua vim.lsp.buf.formatting()<CR>
+vnoremap <silent> gq    <cmd>lua vim.lsp.buf.range_formatting()<CR>
 
 
 " YANK HIGHLIGHT SETTING
