@@ -94,6 +94,8 @@ nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gq    <cmd>lua vim.lsp.buf.formatting()<CR>
 vnoremap <silent> gq    <cmd>lua vim.lsp.buf.range_formatting()<CR>
+nnoremap <silent> ge    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+
 
 
 " YANK HIGHLIGHT SETTING
