@@ -74,6 +74,7 @@ nnoremap <Leader><Leader> <C-^>
 nnoremap j gj
 nnoremap k gk
 
+
 " NVIM-LSP CONFIG
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
@@ -81,6 +82,7 @@ lua <<EOF
 require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
 require'lspconfig'.yamlls.setup{on_attach=require'completion'.on_attach}
 EOF
+
 
 " NVIM-LSP REMAPS
 nnoremap <silent> <c-j> <cmd>lua vim.lsp.buf.definition()<CR>
@@ -95,16 +97,18 @@ nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gq    <cmd>lua vim.lsp.buf.formatting()<CR>
 vnoremap <silent> gq    <cmd>lua vim.lsp.buf.range_formatting()<CR>
 nnoremap <silent> ge    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-
+nnoremap <silent> gE    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 
 
 " YANK HIGHLIGHT SETTING
 let g:highlightedyank_highlight_duration = 100
 
+
 " FZF MAPPING
 nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <leader>f :FZF<cr>
 nnoremap <silent> <leader>F :FZF ~<cr>
+
 
 " CUSTOM COMMANDS
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
