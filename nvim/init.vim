@@ -81,7 +81,13 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua <<EOF
 require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
 require'lspconfig'.yamlls.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.jdtls.setup{on_attach=require'completion'.on_attach}
 EOF
+
+" FUGITIVE REMAPS
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
 
 
 " NVIM-LSP REMAPS
