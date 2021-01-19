@@ -10,6 +10,37 @@ export PAGER=/bin/less
 ##############################
 ###########FUNCTIONS##########
 ##############################
+
+session_name="$(basename "$PWD" | tr . -)"
+
+session_exists() {
+  tmux list-sessions | sed -E 's/:.*$//' | grep -q "^$session_name$"
+}
+
+not_in_tmux() {
+  [ -z "$TMUX" ]
+}
+
+if not_in_tmux; then
+  tmux new-session -As "$session_name" -c /home/megaman
+else
+  if ! session_exists; then
+    (TMUX='' tmux new-session -Ad -s "$session_name" -c /home/megaman)
+  fi
+  tmux switch-client -t "$session_name"
+fi
+
+_not_inside_tmux() { [[ -z "$TMUX" ]] }
+
+ensure_tmux_is_running() {
+  if _not_inside_tmux; then
+    tat
+  fi
+}
+
+ensure_tmux_is_running
+
+
 mkcd () {
     mkdir -p "$@" && cd "$@"
 }

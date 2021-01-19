@@ -11,7 +11,7 @@ call minpac#add('morhetz/gruvbox')                                          "col
 call minpac#add('junegunn/seoul256.vim')                                    "colorscheme
 call minpac#add('chriskempson/base16-vim')                                  "colorscheme collection
 call minpac#add('justinmk/vim-sneak')                                       "fav motion
-"call minpac#add('davidhalter/jedi-vim')                                     "python completion
+"call minpac#add('davidhalter/jedi-vim')                                    "python completion
 "call minpac#add('dense-analysis/ale')
 "call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 call minpac#add('tpope/vim-surround')
