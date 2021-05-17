@@ -1,33 +1,28 @@
 set nocompatible
 packadd minpac
-packadd nvim-lspconfig
 call minpac#init()
-
-" minpac must have {'type': 'opt'} so that it can be loaded with `packadd`.
 call minpac#add('k-takata/minpac', {'type': 'opt'})
+call minpac#add('hoob3rt/lualine.nvim')                                     "statusline written in lua
 call minpac#add('morhetz/gruvbox')                                          "colorscheme
 call minpac#add('junegunn/seoul256.vim')                                    "colorscheme
 call minpac#add('chriskempson/base16-vim')                                  "colorscheme collection
 call minpac#add('justinmk/vim-sneak')                                       "fav motion
-"call minpac#add('davidhalter/jedi-vim')                                    "python completion
-"call minpac#add('dense-analysis/ale')
-"call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
-call minpac#add('tpope/vim-surround')
-call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'})
-call minpac#add('junegunn/fzf.vim')
-call minpac#add('tpope/vim-fugitive')
-call minpac#add('jiangmiao/auto-pairs')
+call minpac#add('tpope/vim-surround')                                       "yss', cs([
+call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}) "fzf should be default
+call minpac#add('junegunn/fzf.vim')                                         "fzf
+call minpac#add('tpope/vim-fugitive')                                       "git from vim
+call minpac#add('jiangmiao/auto-pairs')                                     "only works with paste off
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('neovim/nvim-lspconfig', {'type': 'opt'})
 call minpac#add('nvim-lua/completion-nvim')
-
+call minpac#add('neovim/nvim-lspconfig')
 
 " Markdown stuff
 call minpac#add('godlygeek/tabular')                                        "tab help
 call minpac#add('plasticboy/vim-markdown')                                  "markdown
 
-"let g:seoul256_background = 236
-colorscheme base16-gruvbox-dark-medium
+colorscheme seoul256
+let g:seoul256_background = 234
 set background=dark
 set rtp+=/usr/bin/fzf
 set rtp+=/home/megaman/git/neovim/runtime/lua/vim
@@ -76,11 +71,43 @@ nnoremap k gk
 " NVIM-LSP CONFIG
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-lua <<EOF
+lua << EOF
 require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
 require'lspconfig'.yamlls.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.jdtls.setup{on_attach=require'completion'.on_attach}
+
+-- LUALINE config
+require'lualine'.setup {
+  options = {
+    icons_enabled = false,
+    theme = 'seoul256',
+    component_separators = {'', ''},
+    section_separators = {'', ''},
+    disabled_filetypes = {}
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+
 EOF
+
+
+
 
 " FUGITIVE REMAPS
 nnoremap <leader>gd :Gvdiff<CR>
@@ -118,4 +145,5 @@ nnoremap <silent> <leader>F :FZF ~<cr>
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 command! PackStatus packadd minpac | source $MYVIMRC | call minpac#status()
-command! Cleanshit g/^$/d
+command! CleanEmptyLines g/^$/d
+command! ClearTrailingSpace %s/\s\+$//e
