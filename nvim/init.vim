@@ -2,6 +2,8 @@ set nocompatible
 packadd minpac
 call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
+call minpac#add('mhinz/vim-startify')                                       "fancy start screen
+call minpac#add('tpope/vim-fugitive')
 call minpac#add('hoob3rt/lualine.nvim')                                     "statusline written in lua
 call minpac#add('morhetz/gruvbox')                                          "colorscheme
 call minpac#add('junegunn/seoul256.vim')                                    "colorscheme
@@ -25,30 +27,28 @@ colorscheme seoul256
 let g:seoul256_background = 234
 set background=dark
 set rtp+=/usr/bin/fzf
-set rtp+=/home/megaman/git/neovim/runtime/lua/vim
+set rtp+=$HOME/git/neovim/runtime/lua/vim
 let &t_ut=''
-set updatetime=1000
 set scrolloff=5             "make it so there are always ten lines below my cursor
 set ignorecase              "better search options
 set smartcase
 set splitright              "prefer windows splitting to the right
 set splitbelow              "prefer windows splitting below
-set noequalalways            "When on, all the windows are automatically made the same size after splitting or closing a window.
+set noequalalways           "When on, all the windows are automatically made the same size after splitting or closing a window.
 set cmdheight=1
-set ruler                   "show the line and column number of the cursor position
 set encoding=utf-8
 set termguicolors           "enable true colors support
 set noautoindent            "no autoindent. obvious
 set shiftwidth=4            "indent shiftwidth =4 (>char)
 set tabstop=4               "how many tabs to show for spaces when opening files
 set softtabstop=4           "number of spaces in tab when editing
-set fileformat=unix
 set expandtab               "tabs are spaces
-set relativenumber          "show relative line numbers
-set number                  "show number of current line
+set relativenumber          "show relative line numbers. might cause lag
+set number                  "show number of current lins. might cause lag
 set hidden                  "keep buffer changes and lets me jump between buffers
 set wildmenu                "visual autocomplete for command menu
 set lazyredraw              "redraw only when we need to
+" oktilhere
 set showmatch               "highlight matching [{()}]
 set incsearch               "search as characters are entered
 set hlsearch                "highlight matches
@@ -101,12 +101,10 @@ require'lualine'.setup {
     lualine_z = {}
   },
   tabline = {},
-  extensions = {}
+  extensions = {'quickfix', 'fugitive', 'fzf'}
 }
 
 EOF
-
-
 
 
 " FUGITIVE REMAPS
