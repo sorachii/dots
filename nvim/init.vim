@@ -23,8 +23,9 @@ call minpac#add('neovim/nvim-lspconfig')
 call minpac#add('godlygeek/tabular')                                        "tab help
 call minpac#add('plasticboy/vim-markdown')                                  "markdown
 
+"colorscheme base16-one-light
 colorscheme seoul256
-let g:seoul256_background = 234
+let g:seoul256_background = 236
 set background=dark
 set rtp+=/usr/bin/fzf
 set rtp+=$HOME/git/neovim/runtime/lua/vim
@@ -48,7 +49,6 @@ set number                  "show number of current lins. might cause lag
 set hidden                  "keep buffer changes and lets me jump between buffers
 set wildmenu                "visual autocomplete for command menu
 set lazyredraw              "redraw only when we need to
-" oktilhere
 set showmatch               "highlight matching [{()}]
 set incsearch               "search as characters are entered
 set hlsearch                "highlight matches
@@ -71,9 +71,51 @@ nnoremap k gk
 " NVIM-LSP CONFIG
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
 lua << EOF
-require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.yamlls.setup{on_attach=require'completion'.on_attach}
+
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys 
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', 'gq', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { "pyls" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup { on_attach = on_attach }
+end
+
 
 -- LUALINE config
 require'lualine'.setup {
@@ -111,22 +153,6 @@ EOF
 nnoremap <leader>gd :Gvdiff<CR>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
-
-
-" NVIM-LSP REMAPS
-nnoremap <silent> gd                <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K                 <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD                <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k>             <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD               <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr                <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0                <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW                <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gq                <cmd>lua vim.lsp.buf.formatting()<CR>
-vnoremap <silent> gq                <cmd>lua vim.lsp.buf.range_formatting()<CR>
-nnoremap <silent> ge                <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <silent> gE                <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> gR                <cmd>lua vim.lsp.buf.rename()<CR>
 
 
 " YANK HIGHLIGHT SETTING
