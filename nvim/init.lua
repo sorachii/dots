@@ -28,7 +28,7 @@ require('packer').startup(function()
   use 'ludovicchabant/vim-gutentags'
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
   use 'junegunn/seoul256.vim'
-  use 'hoob3rt/lualine.nvim'
+  use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
   use 'justinmk/vim-sneak'
   use 'mhinz/vim-startify'
   use { 'lukas-reineke/indent-blankline.nvim', branch="lua" }
@@ -37,6 +37,8 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'
 end)
+
+vim.o.scrolloff = 5
 
 --Incremental live completion
 vim.o.inccommand = "nosplit"
