@@ -3,7 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 fpath+=$HOME/.oh-my-zsh/pure
-export ZSH="/home/megaman/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 export EDITOR=/usr/bin/nvim
 export VISUAL=$EDITOR
 export PAGER=/bin/less
