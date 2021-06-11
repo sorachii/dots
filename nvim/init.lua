@@ -28,7 +28,8 @@ require('packer').startup(function()
   use 'ludovicchabant/vim-gutentags'
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
   use 'junegunn/seoul256.vim'
-  use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+  use 'ryanoasis/vim-devicons'
+  use {'hoob3rt/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons', opt = true}
   use 'justinmk/vim-sneak'
   use 'mhinz/vim-startify'
   use { 'lukas-reineke/indent-blankline.nvim', branch="lua" }
@@ -39,6 +40,7 @@ require('packer').startup(function()
 end)
 
 vim.o.scrolloff = 5
+vim.o.wrap = false
 
 --Incremental live completion
 vim.o.inccommand = "nosplit"
@@ -162,7 +164,7 @@ vim.g.splitbelow = true
 vim.api.nvim_exec([[
   augroup YankHighlight
     autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank({ timeout = 10 })
   augroup end
 ]], false)
 
