@@ -173,4 +173,5 @@ autoload -Uz compinit
 compinit
 
 # aliases:
+alias config='/usr/bin/git --git-dir=$HOME/git/bare-dots --work-tree=$HOME'
 source ~/.zsh_aliases
