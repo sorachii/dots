@@ -6,10 +6,6 @@ HISTFILE=~/.zsh_history
 setopt auto_cd
 setopt extended_glob
 
-# Activate context-sensitive completion
-autoload -Uz compinit
-compinit
-
 if [ ! -f ~/.fzf/bin/fzf ]; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 	~/.fzf/install
@@ -46,3 +42,12 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+zstyle :compinstall filename '/home/megaman/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
