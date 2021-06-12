@@ -41,6 +41,11 @@ if [ -e $HOME/.zplug/init.zsh ];then
 	zplug "zsh-users/zsh-completions"
 	zplug "b4b4r07/enhancd"
 
+	zplug "sharkdp/fd", \
+		from:gh-r, \
+		as:command, \
+		rename-to:fd
+
 	zplug "stedolan/jq", \
 		from:gh-r, \
 		as:command, \
