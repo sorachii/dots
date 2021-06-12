@@ -4,7 +4,7 @@ dots are managed as a git bare repo.
 ## setup
 ```
 git clone git@github.com:sorachii/dots.git ~/git/dots
-cd $!
+cd !$
 # TODO:
 # script: install zsh, tmux, alacritty
 # instructions: build neovim-nightly
