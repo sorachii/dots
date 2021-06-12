@@ -16,6 +16,7 @@ if [ -e $HOME/.zplug/init.zsh ];then
 	zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 	zplug "plugins/git", from:oh-my-zsh
 	zplug "zsh-users/zsh-history-substring-search"
+	zplug "chrissicool/zsh-256color"
 	zplug "zsh-users/zsh-completions"
 	zplug "b4b4r07/enhancd"
 
@@ -42,7 +43,7 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# The following lines were added by compinstall
+
 
 zstyle ':completion:*' completer _expand _complete _ignored
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
@@ -50,4 +51,5 @@ zstyle :compinstall filename '/home/megaman/.zshrc'
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
+
+source ~/.zsh_aliases
