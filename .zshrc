@@ -176,9 +176,11 @@ compinit
 # config config --local status.showUntrackedFiles no
 # after git bare setup, run `config checkout`
 
-
 # aliases:
 alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
 alias cc='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME commit'
 alias cs='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME status'
+if [[ ! -e ~/.zsh_aliases ]]; then
+	touch ~/.zsh_aliases
+fi
 source ~/.zsh_aliases
