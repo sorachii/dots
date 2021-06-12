@@ -24,12 +24,12 @@ if [ -e $HOME/.zplug/init.zsh ];then
 	zplug "b4b4r07/enhancd"
 
 	zplug "stedolan/jq", \
-			from:gh-r, \
-			as:command, \
-			rename-to:jq
+		from:gh-r, \
+		as:command, \
+		rename-to:jq
 
 	if ! zplug check; then
-			zplug install
+		zplug install
 	fi
 
 	zplug load --verbose
