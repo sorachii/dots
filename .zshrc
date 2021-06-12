@@ -172,6 +172,13 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 autoload -Uz compinit
 compinit
 
+# useful when working with git bare repo:
+# config config --local status.showUntrackedFiles no
+# after git bare setup, run `config checkout`
+
+
 # aliases:
-alias config='/usr/bin/git --git-dir=$HOME/git/bare-dots --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
+alias cc='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME commit'
+alias cs='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME status'
 source ~/.zsh_aliases
