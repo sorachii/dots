@@ -3,9 +3,9 @@
 # tmux, zsh, nvim
 if command -v apt > /dev/null; then
 	apt full-upgrade
-	apt install zsh tmux
+	apt install zsh tmux sudo -y
 	# build requirements for neovim
-	apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+	apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y
 elif command -v yum > /dev/null; then
 	yum upgrade
 	yum install zsh tmux
