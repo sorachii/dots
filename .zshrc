@@ -29,6 +29,10 @@ if [ ! -f ~/.fzf/bin/fzf ]; then
 	~/.fzf/install
 fi
 
+if ! command -v starship; then
+	sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # zplug init
