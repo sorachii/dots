@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 
 # tmux, zsh, nvim
-if [[ command -v apt ]]; then
+if command -v apt > /dev/null; then
 	apt full-upgrade
 	apt install zsh tmux
 	# build requirements for neovim
 	apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
-elif [[ command -v yum ]]; then
+elif command -v yum > /dev/null; then
 	yum upgrade
 	yum install zsh tmux
 	# build requirements for neovim
 	yum -y install ninja-build libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip patch gettext
-elif [[ command -v pacman ]]; then
+elif command -v pacman > /dev/null; then
 	pacman -Syu
 	pacman -S zsh tmux
 	# build requirements for neovim
 	pacman -S base-devel cmake unzip ninja tree-sitter
-elif [[ command -v apk ]]; then
+elif command -v apk > /dev/null; then
 	# build requirements for neovim
 	apk update
 	apk upgrade
