@@ -30,7 +30,7 @@ fi
 chsh -s $(which zsh) $USER
 
 # building neovim from source
-git clone git@github.com:neovim/neovim.git ~/git/neovim
+git clone https://github.com/neovim/neovim.git ~/git/neovim
 cd ~/git/neovim
 make
 sudo make install
