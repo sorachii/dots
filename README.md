@@ -16,3 +16,4 @@ source ~/.zshrc
 config config --local status.showUntrackedFiles no 
 config checkout
 ```
+Good resource on bare git repos: https://www.ackama.com/blog/posts/the-best-way-to-store-your-dotfiles-a-bare-git-repository-explained
