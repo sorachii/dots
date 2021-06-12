@@ -3,17 +3,19 @@ dots are managed as a git bare repo.
 
 ## setup
 ```
-git clone git@github.com:sorachii/dots.git ~/git/dots
+git clone https://github.com/sorachii/dots.git ~/git/dots
 cd !$
+chmod +x init.sh
+./init.sh
 # TODO:
-# script: install zsh, tmux, alacritty
-# instructions: build neovim-nightly
 # instructions: stow
+zsh
 ```
-after stow, run:
+## to continue tracking files with bare git repo
 ```
-source ~/.zshrc
 config config --local status.showUntrackedFiles no 
 config checkout
 ```
+
+---
 Good resource on bare git repos: https://www.ackama.com/blog/posts/the-best-way-to-store-your-dotfiles-a-bare-git-repository-explained
