@@ -7,10 +7,12 @@ git clone https://github.com/sorachii/dots.git ~/git/dots
 cd !$
 chmod +x init.sh
 ./init.sh
+cp ~/git/dots/.zshrc ~
+zsh
 # TODO:
 # instructions: stow
-zsh
 ```
+
 ## to continue tracking files with bare git repo
 ```
 config config --local status.showUntrackedFiles no 
