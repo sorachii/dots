@@ -57,6 +57,8 @@ if [ -e $HOME/.zplug/init.zsh ];then
 
 	zplug load --verbose
 	eval "$(starship init zsh)"
+else
+	git clone https://github.com/zplug/zplug ~/.zplug
 fi
 
 # zsh completion strategies
@@ -180,6 +182,7 @@ compinit
 alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
 alias cc='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME commit'
 alias cs='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME status'
+alias ca='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME add $@'
 if [[ ! -e ~/.zsh_aliases ]]; then
 	touch ~/.zsh_aliases
 fi
