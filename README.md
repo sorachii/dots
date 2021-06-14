@@ -6,7 +6,7 @@ dots are managed as a git bare repo.
 git clone https://github.com/sorachii/dots.git ~/git/dots
 cd !$
 chmod +x init.sh
-./init.sh
+sudo ./init.sh
 cp ~/git/dots/.zshrc ~
 zsh
 # TODO:
