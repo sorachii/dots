@@ -7,7 +7,7 @@ echo "$HOME/git/dots" >> ~/.gitignore
 git clone https://github.com/sorachii/dots.git ~/git/dots
 cd !$
 chmod +x init.sh
-sudo ./init.sh
+./init.sh
 zsh
 # IN ZSH:
 # this places the config files to their respective location

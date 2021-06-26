@@ -3,8 +3,8 @@
 echo "Update system, then installing zsh, tmux and build tools for neovim."
 # Installing mytmux, zsh, nvim
 if command -v apt > /dev/null; then
-	apt update
-	apt upgrade -y
+	sudo apt update
+	sudo apt upgrade -y
 	sudo apt install zsh tmux -y
 	# build requirements for neovim
 	sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y
