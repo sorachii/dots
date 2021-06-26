@@ -184,9 +184,10 @@ compinit
 
 # aliases:
 alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
-alias cc='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME commit'
 alias cs='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME status'
 alias ca='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME add $@'
+alias cc='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME commit'
+alias cpush='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME push'
 if [[ ! -e ~/.zsh_aliases ]]; then
 	touch ~/.zsh_aliases
 fi
