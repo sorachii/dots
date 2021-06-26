@@ -3,20 +3,17 @@ dots are managed as a git bare repo.
 
 ## setup
 ```
+echo "$HOME/git/dots" >> ~/.gitignore
 git clone https://github.com/sorachii/dots.git ~/git/dots
 cd !$
 chmod +x init.sh
 sudo ./init.sh
-cp ~/git/dots/.zshrc ~
 zsh
-# TODO:
-# instructions: stow
-```
-
-## to continue tracking files with bare git repo
-```
-config config --local status.showUntrackedFiles no 
-config checkout
+# IN ZSH:
+# this places the config files to their respective location
+config checkout -f
+# useful for tracking config files with bare git repo:
+config config --local status.showUntrackedFiles no
 ```
 
 ---
