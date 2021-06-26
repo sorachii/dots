@@ -28,8 +28,9 @@ else
 	echo "Your distro is not between the supported ones."
 fi
 
-# If tpm can't be found, download it
+# If tpm can't be found, download it.
 [ ! -d ${HOME}/.tmux/plugins/tpm  ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+# In first tmux session press `M-s I` to install plugins.
 
 # Building neovim from source
 if [ -d ~/git/neovim  ]; then
