@@ -27,6 +27,7 @@ else
 	echo "Your distro is not between the supported ones."
 fi
 
+cp ~/git/dots/.zshrc ~
 chsh -s $(which zsh) $USER
 
 # building neovim from source
