@@ -107,24 +107,23 @@ window:
 font:
   # Normal (roman) font face
   normal:
-    family: Iosevka Term
+    family: Iosevka Nerd Font
     style: Regular
 
-
   # Bold font face
-  bold:
-    family: Iosevka Term
-    style: Bold
+  # bold:
+  #   family: Iosevka Term
+  #   style: Bold
 
-  # Italic font face
-  italic:
-    family: Iosevka Term
-    style: Italic
+  # # Italic font face
+  # italic:
+  #   family: Iosevka Term
+  #   style: Italic
 
-  # Bold italic font face
-  bold_italic:
-    family: Iosevka Term
-    style: Bold-Italic
+  # # Bold italic font face
+  # bold_italic:
+  #   family: Iosevka Term
+  #   style: Bold-Italic
 
   # Point size
   size: 14.0
