@@ -166,7 +166,7 @@ vim.g.splitbelow = true
 vim.api.nvim_exec([[
   augroup YankHighlight
     autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank({ timeout = 10 })
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=300 })
   augroup end
 ]], false)
 
