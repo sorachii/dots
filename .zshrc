@@ -194,4 +194,6 @@ alias cpush='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME push'
 if [[ ! -e ~/.zsh_aliases ]]; then
 	touch ~/.zsh_aliases
 fi
+
+source ~/.profile
 source ~/.zsh_aliases
