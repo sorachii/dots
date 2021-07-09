@@ -2,6 +2,9 @@ HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
 
+export EDITOR=$(which nvim)
+export VISUAL=$(which nvim)
+
 DISABLE_LS_COLORS="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
