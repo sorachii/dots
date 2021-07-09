@@ -29,10 +29,10 @@ require('packer').startup(function()
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
   use 'junegunn/seoul256.vim'
   use 'ryanoasis/vim-devicons'
-  use {'hoob3rt/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons', opt = true}
+  use {'hoob3rt/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
   use 'justinmk/vim-sneak'
   use 'mhinz/vim-startify'
-  use { 'lukas-reineke/indent-blankline.nvim', branch="lua" }
+--  use { 'lukas-reineke/indent-blankline.nvim', branch="master" }
   use 'sheerun/vim-polyglot'
   use 'lewis6991/gitsigns.nvim'
   use 'neovim/nvim-lspconfig'
@@ -122,11 +122,13 @@ vim.api.nvim_exec([[
 --Add map to enter paste mode
 vim.o.pastetoggle="<F3>"
 
---Map blankline
-vim.g.indent_blankline_char = "┊"
-vim.g.indent_blankline_filetype_exclude = { 'help' }
-vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile', 'packer'}
-vim.g.indent_blankline_char_highlight = 'LineNr'
+----Map blankline
+----TODO: remove or make it so the indentation is by changed background-color,
+--     -- because when copying via tmux/mouse, those fuckin' lines interfere
+--vim.g.indent_blankline_char = "┊"
+--vim.g.indent_blankline_filetype_exclude = { 'help' }
+--vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile', 'packer'}
+--vim.g.indent_blankline_char_highlight = 'LineNr'
 
 -- Telescope
 require('telescope').setup {
