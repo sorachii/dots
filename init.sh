@@ -5,7 +5,7 @@ echo "Update system, then installing zsh, tmux and build tools for neovim."
 if command -v apt > /dev/null; then
 	sudo apt update
 	sudo apt upgrade -y
-	sudo apt install zsh tmux -y
+	sudo apt install zsh tmux python3-pip -y
 	# build requirements for neovim
 	sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y
 elif command -v yum > /dev/null; then
@@ -32,6 +32,12 @@ fi
 [ ! -d ${HOME}/.tmux/plugins/tpm  ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 # In first tmux session press `M-s I` to install plugins.
 
+# Install pip2
+if command -v python2 > /dev/null; then
+	curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output /tmp/get-pip.py
+	sudo python2 /tmp/get-pip.py
+fi
+
 # Building neovim from source
 if [ -d ~/git/neovim  ]; then
 	echo "Neovim is already installed"
@@ -41,6 +47,9 @@ else
 	git checkout origin/release-0.5
 	make
 	sudo make install
+	if command -v pip3 > /dev/null; then
+		pip3 install python-language-server
+	fi
 fi
 
 # Copying zsh config then using it is necessary for
