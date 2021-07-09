@@ -38,6 +38,7 @@ if [ -d ~/git/neovim  ]; then
 else
 	git clone https://github.com/neovim/neovim.git ~/git/neovim
 	cd ~/git/neovim
+	git checkout origin/release-0.5
 	make
 	sudo make install
 fi
