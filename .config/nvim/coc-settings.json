@@ -1,0 +1,5 @@
+{
+	"codeLens.enable": true,
+	"java.referencesCodeLens.enabled": true,
+	"java.jdt.ls.vmargs": "-javaagent:~/.local/share/lombok/lombok.jar"
+}

@@ -25,6 +25,10 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d "$(readlink -f /usr/bin/java)" ] ; then
+    export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+fi
+
 if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"
 fi

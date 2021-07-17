@@ -35,6 +35,7 @@ require('packer').startup(function()
 --  use { 'lukas-reineke/indent-blankline.nvim', branch="master" }
   use 'sheerun/vim-polyglot'
   use 'lewis6991/gitsigns.nvim'
+  use { 'neoclide/coc.nvim', branch = 'release' }
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'
 end)
