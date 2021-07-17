@@ -5,7 +5,7 @@ echo "Update system, then installing zsh, tmux and build tools for neovim."
 if command -v apt > /dev/null; then
 	sudo apt update
 	sudo apt upgrade -y
-	sudo apt install zsh tmux python3-pip -y
+	sudo apt install zsh tmux python3-pip nodejs npm -y
 	# build requirements for neovim
 	sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y
 elif command -v yum > /dev/null; then
@@ -47,8 +47,12 @@ else
 	git checkout origin/release-0.5
 	make
 	sudo make install
-	if command -v pip3 > /dev/null; then
-		pip3 install python-language-server
+
+	# Pyright is needed for nvim-lsp
+	if command -v npm > /dev/null; then
+		sudo npm install -g pyright
+	else
+		echo "Npm is not installed. It is needed for nvim-lsp."
 	fi
 fi
 
