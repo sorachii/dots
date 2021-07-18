@@ -21,6 +21,11 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+# LUA_PATH needs in order to nvim's lua exports work
+if [ -d "$HOME/.config/nvim" ] ; then
+    export LUA_PATH="$HOME/.config/nvim/jdtls_setup.lua;;"
+fi
+
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi

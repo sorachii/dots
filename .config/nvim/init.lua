@@ -37,6 +37,7 @@ require('packer').startup(function()
   use 'lewis6991/gitsigns.nvim'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'
+  use 'mfussenegger/nvim-jdtls' -- java lsp
 end)
 
 vim.o.scrolloff = 5
@@ -197,11 +198,18 @@ local on_attach = function(_client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 end
 
-local servers = { 'pyright'}
+local servers = { 'pyright' }
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
+
+vim.api.nvim_exec([[
+  augroup jdtls_lsp
+    autocmd!
+    autocmd FileType java lua require'jdtls_setup'.setup()
+  augroup end
+]], false)
 
 -- Map :Format to vim.lsp.buf.formatting()
 vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
