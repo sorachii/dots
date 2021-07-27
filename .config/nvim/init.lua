@@ -30,6 +30,7 @@ require('packer').startup(function()
   use 'junegunn/seoul256.vim'
   use 'ryanoasis/vim-devicons'
   use {'hoob3rt/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+  use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate'}
   use 'justinmk/vim-sneak'
   use 'mhinz/vim-startify'
 --  use { 'lukas-reineke/indent-blankline.nvim', branch="master" }
