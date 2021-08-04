@@ -28,6 +28,7 @@ require('packer').startup(function()
   use 'ludovicchabant/vim-gutentags'
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
   use 'junegunn/seoul256.vim'
+  use 'eddyekofo94/gruvbox-flat.nvim'
   use 'ryanoasis/vim-devicons'
   use {'hoob3rt/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
   use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate'}
@@ -70,15 +71,22 @@ vim.wo.signcolumn="yes"
 
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
-vim.g.seoul256_background = 236
-vim.g.background = dark
-vim.cmd[[colorscheme seoul256]]
+vim.cmd[[colorscheme gruvbox-flat]]
+-- vim.g.seoul256_background = 236
+-- vim.g.background = dark
+-- vim.cmd[[colorscheme seoul256]]
+--vim.cmd[[colorscheme seoul256-light]]
+
+--Thinkering with auto color change for lualine
+--vim.api.nvim_command("autocmd optionset background lua require('lualine').setup()")
 
 --Set statusbar
 require'lualine'.setup {
   options = {
     icons_enabled = false,
-    theme = 'seoul256',
+    theme = 'gruvbox-flat',
+    --theme = 'seoul256',
+    --theme = 'seoul256-light',
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {}
