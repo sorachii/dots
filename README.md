@@ -1,3 +1,5 @@
+[![Gittens](http://gittens.r15.railsrumble.com//badge/sorachii/dots)](http://gittens.r15.railsrumble.com/gitten/sorachii/dots)
+
 # about this repo
 dots are managed as a git bare repo.
 
