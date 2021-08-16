@@ -208,21 +208,26 @@ local on_attach = function(_client, bufnr)
 end
 
 local servers = { 'pyright' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+  }
+end
 
 vim.schedule(function()
   vim.cmd('COQnow')
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({
-      on_attach = on_attach,
-    }))
+          on_attach = on_attach_callback,
+      }))
   end
 end)
 
 vim.api.nvim_exec([[
   augroup jdtls_lsp
-    autocmd!
-    autocmd FileType java lua require'jdtls_setup'.setup()
-  augroup end
+  autocmd!
+  autocmd FileType java lua require'jdtls_setup'.setup()
+augroup end
 ]], false)
 
 -- Map :Format to vim.lsp.buf.formatting()
@@ -233,31 +238,31 @@ vim.o.completeopt="menuone,noinsert,noselect"
 
 -- Compe setup
 -- require'compe'.setup {
---   enabled = true;
---   autocomplete = true;
---   debug = false;
---   min_length = 1;
---   preselect = 'enable';
---   throttle_time = 80;
---   source_timeout = 200;
---   incomplete_delay = 400;
---   max_abbr_width = 100;
---   max_kind_width = 100;
---   max_menu_width = 100;
---   documentation = true;
+  --   enabled = true;
+  --   autocomplete = true;
+  --   debug = false;
+  --   min_length = 1;
+  --   preselect = 'enable';
+  --   throttle_time = 80;
+  --   source_timeout = 200;
+  --   incomplete_delay = 400;
+  --   max_abbr_width = 100;
+  --   max_kind_width = 100;
+  --   max_menu_width = 100;
+  --   documentation = true;
 
---   source = {
---     path = true;
---     buffer = false;
---     calc = true;
---     vsnip = false;
---     nvim_lsp = true;
---     nvim_lua = true;
---     spell = true;
---     tags = false;
---     snippets_nvim = true;
---     treesitter = true;
---   };
+  --   source = {
+    --     path = true;
+    --     buffer = false;
+    --     calc = true;
+    --     vsnip = false;
+    --     nvim_lsp = true;
+    --     nvim_lua = true;
+    --     spell = true;
+    --     tags = false;
+    --     snippets_nvim = true;
+    --     treesitter = true;
+  --   };
 -- }
 
 require'nvim-treesitter.configs'.setup {
@@ -268,21 +273,21 @@ require'nvim-treesitter.configs'.setup {
     disable = {},  -- list of language that will be disabled
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
+      -- Using this option may slow down your editor, and you may see some duplicate highlights.
+      -- Instead of true it can also be a list of languages
+      additional_vim_regex_highlighting = false,
+    },
+  }
 
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+  local t = function(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+  end
 
-local check_back_space = function()
+  local check_back_space = function()
     local col = vim.fn.col('.') - 1
     if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
+      return true
     else
-        return false
+      return false
     end
-end
+  end
