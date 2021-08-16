@@ -236,35 +236,6 @@ vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 -- Set completeopt to have a better completion experience
 vim.o.completeopt="menuone,noinsert,noselect"
 
--- Compe setup
--- require'compe'.setup {
-  --   enabled = true;
-  --   autocomplete = true;
-  --   debug = false;
-  --   min_length = 1;
-  --   preselect = 'enable';
-  --   throttle_time = 80;
-  --   source_timeout = 200;
-  --   incomplete_delay = 400;
-  --   max_abbr_width = 100;
-  --   max_kind_width = 100;
-  --   max_menu_width = 100;
-  --   documentation = true;
-
-  --   source = {
-    --     path = true;
-    --     buffer = false;
-    --     calc = true;
-    --     vsnip = false;
-    --     nvim_lsp = true;
-    --     nvim_lua = true;
-    --     spell = true;
-    --     tags = false;
-    --     snippets_nvim = true;
-    --     treesitter = true;
-  --   };
--- }
-
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = { "javascript" }, -- List of parsers to ignore installing
@@ -279,15 +250,15 @@ require'nvim-treesitter.configs'.setup {
     },
   }
 
-  local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-  end
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 
-  local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-      return true
-    else
-      return false
-    end
+local check_back_space = function()
+  local col = vim.fn.col('.') - 1
+  if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+    return true
+  else
+    return false
   end
+end
