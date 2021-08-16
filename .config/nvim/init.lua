@@ -14,7 +14,6 @@ vim.api.nvim_exec([[
   augroup end
 ]], false)
 
-
 local use = require('packer').use
 require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
@@ -38,7 +37,8 @@ require('packer').startup(function()
   use 'sheerun/vim-polyglot'
   use 'lewis6991/gitsigns.nvim'
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
+  use {'ms-jpq/coq_nvim', branch = 'coq'}
+  use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
   use 'mfussenegger/nvim-jdtls' -- java lsp
 end)
 
@@ -209,9 +209,14 @@ end
 
 local servers = { 'pyright' }
 
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
-end
+vim.schedule(function()
+  vim.cmd('COQnow')
+  for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({
+      on_attach = on_attach,
+    }))
+  end
+end)
 
 vim.api.nvim_exec([[
   augroup jdtls_lsp
@@ -227,33 +232,33 @@ vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 vim.o.completeopt="menuone,noinsert,noselect"
 
 -- Compe setup
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
+-- require'compe'.setup {
+--   enabled = true;
+--   autocomplete = true;
+--   debug = false;
+--   min_length = 1;
+--   preselect = 'enable';
+--   throttle_time = 80;
+--   source_timeout = 200;
+--   incomplete_delay = 400;
+--   max_abbr_width = 100;
+--   max_kind_width = 100;
+--   max_menu_width = 100;
+--   documentation = true;
 
-  source = {
-    path = true;
-    buffer = false;
-    calc = true;
-    vsnip = false;
-    nvim_lsp = true;
-    nvim_lua = true;
-    spell = true;
-    tags = false;
-    snippets_nvim = true;
-    treesitter = true;
-  };
-}
+--   source = {
+--     path = true;
+--     buffer = false;
+--     calc = true;
+--     vsnip = false;
+--     nvim_lsp = true;
+--     nvim_lua = true;
+--     spell = true;
+--     tags = false;
+--     snippets_nvim = true;
+--     treesitter = true;
+--   };
+-- }
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -269,7 +274,6 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
-
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -282,28 +286,3 @@ local check_back_space = function()
         return false
     end
 end
-
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  else
-    return t "<S-Tab>"
-  end
-end
-
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
