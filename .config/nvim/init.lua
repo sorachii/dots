@@ -207,21 +207,17 @@ local on_attach = function(_client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 end
 
+-- Nvim LSP and COQ initialisation
 local servers = { 'pyright' }
+local coq = require "coq"
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-  }
+  nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({
+        on_attach = on_attach,
+    }))
 end
 
-vim.schedule(function()
-  vim.cmd('COQnow')
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({
-          on_attach = on_attach_callback,
-      }))
-  end
-end)
+-- Start COQ completion
+vim.cmd [[COQnow]]
 
 vim.api.nvim_exec([[
   augroup jdtls_lsp
