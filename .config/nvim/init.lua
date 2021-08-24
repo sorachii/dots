@@ -140,20 +140,6 @@ vim.o.pastetoggle="<F3>"
 --vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile', 'packer'}
 --vim.g.indent_blankline_char_highlight = 'LineNr'
 
--- Telescope
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-u>"] = false,
-        ["<C-d>"] = false,
-      },
-    },
-    generic_sorter =  require'telescope.sorters'.get_fzy_sorter,
-    file_sorter =  require'telescope.sorters'.get_fzy_sorter,
-  }
-}
-
 --Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>F', [[<cmd>lua require('telescope.builtin').find_files{ cwd = "~"}<cr>]], { noremap = true, silent = true})
