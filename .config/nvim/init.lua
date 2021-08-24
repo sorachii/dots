@@ -36,6 +36,7 @@ require('packer').startup(function()
   --use { 'lukas-reineke/indent-blankline.nvim', branch="master" }
   use 'sheerun/vim-polyglot'
   use 'lewis6991/gitsigns.nvim'
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'neovim/nvim-lspconfig'
   use {'ms-jpq/coq_nvim', branch = 'coq'}
   use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
@@ -139,6 +140,21 @@ vim.o.pastetoggle="<F3>"
 --vim.g.indent_blankline_filetype_exclude = { 'help' }
 --vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile', 'packer'}
 --vim.g.indent_blankline_char_highlight = 'LineNr'
+
+require('telescope').setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = false, -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    }
+  }
+}
+-- To get fzf loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require('telescope').load_extension('fzf')
 
 --Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
