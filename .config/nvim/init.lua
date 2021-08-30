@@ -121,6 +121,7 @@ vim.g.maplocalleader = " "
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true})
 vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true})
 
+
 --Remap escape to leave terminal mode
 vim.api.nvim_exec([[
   augroup Terminal
@@ -170,6 +171,11 @@ vim.api.nvim_set_keymap('n', '<leader>gc', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>gp', [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], { noremap = true, silent = true})
+
+--Better quickfix naviggation remap 
+vim.api.nvim_set_keymap('n', '<c-j>', [[<cmd>cnext<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<c-k>', [[<cmd>cprev<cr>]], { noremap = true, silent = true})--interferes with lsp's signature_help binding otherwise nice
+vim.api.nvim_set_keymap('n', '<c-q>', [[<cmd>copen<cr>]], { noremap = true, silent = true})--should check if quickfix list is open, if so, ':q'
 
 -- Change preview window location
 vim.g.splitbelow = true
