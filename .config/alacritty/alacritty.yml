@@ -7,6 +7,9 @@ font:
     style: Regular
   size: 14
 colors:
+  cursor:
+    text: "#FFFFFF"
+    cursor: "#FDAB9F"
   primary:
     background: "#32302F"
     foreground: "#d4be98"
