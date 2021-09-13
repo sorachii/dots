@@ -5,7 +5,7 @@ echo "Update system, then installing zsh, tmux and build tools for neovim."
 if command -v apt > /dev/null; then
 	sudo apt update
 	sudo apt upgrade -y
-	sudo apt install zsh tmux python3-pip nodejs npm -y
+	sudo apt install zsh tmux python3-pip python3-venv ripgrep curl universal-ctags nodejs npm -y
 	# build requirements for neovim
 	sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y
 elif command -v yum > /dev/null; then
@@ -55,6 +55,7 @@ else
 		echo "Npm is not installed. It is needed for nvim-lsp."
 	fi
 fi
+echo "You need to `:PackerSync` and `:COQdeps` once you open nvim"
 
 # Copying zsh config then using it is necessary for
 # finishing the configuration and for bare git repo to work
