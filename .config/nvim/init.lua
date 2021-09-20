@@ -74,12 +74,12 @@ vim.wo.signcolumn="yes"
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
 vim.g.background = dark
-vim.g.seoul256_background = 234
-vim.g.seoul256_light_background = 256
-vim.g.seoul256_srgb = 1
--- vim.g.gruvbox_flat_style = "hard"
--- vim.cmd[[colorscheme gruvbox-flat]]
-vim.cmd[[colorscheme seoul256]]
+-- vim.g.seoul256_background = 234
+-- vim.g.seoul256_light_background = 256
+-- vim.g.seoul256_srgb = 1
+vim.g.gruvbox_material_background = "hard"
+vim.cmd[[colorscheme gruvbox-material]]
+-- vim.cmd[[colorscheme seoul256]]
 -- vim.cmd[[colorscheme seoul256-light]]
 
 --Thinkering with auto color change for lualine
