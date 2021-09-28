@@ -9,13 +9,14 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 if command -v nvim > /dev/null; then
-  alias v="nvim"
+  EDITOR="nvim"
 elif command -v vim > /dev/null; then
-  alias v="vim"
+  EDITOR="vim"
 else
-  alias v="vi"
+  EDITOR="vi"
 fi
 
+alias v=$EDITOR
 alias d="docker"
 alias biggest="du -h --max-depth=1 | sort -h"
 alias j="jobs"
@@ -28,7 +29,7 @@ alias ....='cd ../../../../'
 alias .....='cd ../../../../'
 
 export TERM=xterm-256color
-export EDITOR=$(which nvim)
+export EDITOR
 export VISUAL=$EDITOR
 
 # Personal binaries
