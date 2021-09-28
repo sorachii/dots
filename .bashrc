@@ -8,8 +8,14 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-#if [ command -v nvim > /dev/null;
-alias v="nvim"
+if command -v nvim > /dev/null; then
+  alias v="nvim"
+elif command -v vim > /dev/null; then
+  alias v="vim"
+else
+  alias v="vi"
+fi
+
 alias d="docker"
 alias biggest="du -h --max-depth=1 | sort -h"
 alias j="jobs"
