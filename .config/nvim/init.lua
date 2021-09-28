@@ -20,9 +20,7 @@ require('packer').startup(function()
   use 'tpope/vim-vinegar'
   use 'tpope/vim-surround'
   use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'
   use 'tpope/vim-repeat'
-  use 'tpope/vim-sleuth'
   use 'tpope/vim-commentary'
   use 'ludovicchabant/vim-gutentags'
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
@@ -33,6 +31,7 @@ require('packer').startup(function()
   use {'hoob3rt/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
   use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate'}
   use 'ggandor/lightspeed.nvim'
+  use 'justinmk/vim-dirvish'
   use 'mhinz/vim-startify'
   --use { 'lukas-reineke/indent-blankline.nvim', branch="master" }
   use 'sheerun/vim-polyglot'
