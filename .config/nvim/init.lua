@@ -218,7 +218,7 @@ local on_attach = function(_client, bufnr)
 end
 
 -- Nvim LSP and COQ initialisation
-local servers = { 'pyright', 'tsserver' }
+local servers = { 'pyright', 'tsserver', 'bashls' }
 local coq = require "coq"
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({
