@@ -17,7 +17,6 @@ vim.api.nvim_exec([[
 local use = require('packer').use
 require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
-  use 'tpope/vim-vinegar'
   use 'tpope/vim-surround'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
@@ -34,8 +33,8 @@ require('packer').startup(function()
   use 'justinmk/vim-dirvish'
   use 'mhinz/vim-startify'
   --use { 'lukas-reineke/indent-blankline.nvim', branch="master" }
+  -- use 'lewis6991/gitsigns.nvim'
   use 'sheerun/vim-polyglot'
-  use 'lewis6991/gitsigns.nvim'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'neovim/nvim-lspconfig'
   use {'ms-jpq/coq_nvim', branch = 'coq'}
