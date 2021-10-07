@@ -90,4 +90,13 @@ if [ "${UID}" -eq "0" ]; then
 fi
 
 # Patent Pending Prompt
-export PS1="${nameC}\u${atC}@${hostC}\h:${pathC}\w${gitC}\$(gitPrompt)${pointerC}▶${normalC} "
+if command -v __git_ps1 > /dev/null; then
+  export PS1="${nameC}\u${atC}@${hostC}\h:${pathC}\w${gitC}\$(gitPrompt)${pointerC}▶${normalC} "
+else
+  export PS1="${nameC}\u${atC}@${hostC}\h:${pathC}\w${pointerC}▶${normalC} "
+fi
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
