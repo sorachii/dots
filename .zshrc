@@ -186,6 +186,7 @@ compinit
 # after git bare setup, run `config checkout`
 
 # aliases:
+alias biggest='df -h /;cd /;find . -xdev -type f -size +50M -not -path "./local/*" -print 2>/dev/null | xargs du -sch | sort -h'
 alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
 alias cs='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME status'
 alias ca='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME add $@'
@@ -197,3 +198,7 @@ fi
 
 source ~/.profile
 source ~/.zsh_aliases
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
