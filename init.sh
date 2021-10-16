@@ -7,7 +7,7 @@ if command -v apt > /dev/null; then
 	sudo apt upgrade -y
 	sudo apt install zsh tmux python3-pip python3-venv ripgrep curl universal-ctags nodejs npm -y
 	# build requirements for neovim
-	sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y
+	sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen -y
 elif command -v yum > /dev/null; then
 	sudo yum upgrade
 	sudo yum install zsh tmux
@@ -44,8 +44,8 @@ if [ -d ~/git/neovim  ]; then
 else
 	git clone https://github.com/neovim/neovim.git ~/git/neovim
 	cd ~/git/neovim
-	git checkout origin/release-0.5
-	make
+	git checkout stable
+	sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
 	sudo make install
 
 	# Pyright is needed for nvim-lsp
