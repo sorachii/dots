@@ -2,10 +2,19 @@ HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
 
-export EDITOR=$(which nvim)
-export VISUAL=$(which nvim)
+set -o emacs
 
-DISABLE_LS_COLORS="true"
+if command -v nvim > /dev/null; then
+  EDITOR="nvim"
+elif command -v vim > /dev/null; then
+  EDITOR="vim"
+else
+  EDITOR="vi"
+fi
+
+export EDITOR
+export VISUAL=${EDITOR}
+
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 
@@ -198,7 +207,3 @@ fi
 
 source ~/.profile
 source ~/.zsh_aliases
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
