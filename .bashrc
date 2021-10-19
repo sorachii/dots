@@ -16,6 +16,7 @@ else
   EDITOR="vi"
 fi
 
+alias ipb="ip -brief address"
 alias v=$EDITOR
 alias d="docker"
 alias biggest="du -h --max-depth=1 | sort -h"
