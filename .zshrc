@@ -205,5 +205,11 @@ if [[ ! -e ~/.zsh_aliases ]]; then
 	touch ~/.zsh_aliases
 fi
 
+# Attach shared folder on vmware player
+share_pls() {
+	sudo vmhgfs-fuse .host:/ /mnt -o subtype=vmhgfs-fuse,allow_other
+	ls -latrh /mnt/shared
+}
+
 source ~/.profile
 source ~/.zsh_aliases
