@@ -42,8 +42,6 @@ if [ -e $HOME/.zplug/init.zsh ];then
 	source ~/.zplug/init.zsh
 	zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 	zplug "plugins/git", from:oh-my-zsh
-	zplug "zsh-users/zsh-history-substring-search"
-	zplug "chrissicool/zsh-256color"
 	zplug "zsh-users/zsh-completions"
 	zplug "b4b4r07/enhancd"
 
@@ -51,11 +49,6 @@ if [ -e $HOME/.zplug/init.zsh ];then
 		from:gh-r, \
 		as:command, \
 		rename-to:fd
-
-	zplug "stedolan/jq", \
-		from:gh-r, \
-		as:command, \
-		rename-to:jq
 
 	if ! zplug check; then
 		zplug install
