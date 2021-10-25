@@ -28,6 +28,9 @@ else
 	echo "Your distro is not between the supported ones."
 fi
 
+# Checks out all dotfiles:
+git --git-dir=$HOME/git/dots/.git --work-tree=$HOME checkout -f
+
 # If tpm can't be found, download it.
 [ ! -d ${HOME}/.tmux/plugins/tpm  ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 # In first tmux session press `M-s I` to install plugins.
@@ -55,8 +58,9 @@ else
 		echo "Npm is not installed. It is needed for nvim-lsp."
 	fi
 fi
-# nvim --headless +PackerSync +qa
-echo "You need to :PackerSync and :COQdeps once you open nvim"
+
+# Installing nvim plugins
+nvim --headless +PackerSync +qa
 
 # Install fzf
 if [ ! -f ~/.fzf/bin/fzf ]; then
@@ -69,7 +73,5 @@ if ! command -v starship; then
 	sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 fi
 
-# Copying zsh config then using it is necessary for
-# finishing the configuration and for bare git repo to work
-cp ~/git/dots/.zshrc ~
+# Changes current user's shell to zsh
 chsh -s $(which zsh) $USER
