@@ -55,7 +55,19 @@ else
 		echo "Npm is not installed. It is needed for nvim-lsp."
 	fi
 fi
-echo "You need to `:PackerSync` and `:COQdeps` once you open nvim"
+# nvim --headless +PackerSync +qa
+echo "You need to :PackerSync and :COQdeps once you open nvim"
+
+# Install fzf
+if [ ! -f ~/.fzf/bin/fzf ]; then
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	~/.fzf/install
+fi
+
+# Install starship prompt
+if ! command -v starship; then
+	sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+fi
 
 # Copying zsh config then using it is necessary for
 # finishing the configuration and for bare git repo to work

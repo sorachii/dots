@@ -35,16 +35,6 @@ setopt EXTENDED_GLOB        # Needed for file modification glob modifiers with c
 unsetopt MENU_COMPLETE      # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
 
-# fzf
-if [ ! -f ~/.fzf/bin/fzf ]; then
-	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-	~/.fzf/install
-fi
-
-if ! command -v starship; then
-	sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-fi
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # zplug init
