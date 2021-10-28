@@ -59,7 +59,7 @@ setopt promptsubst
 zinit lucid for \
     atinit"
         ZSH_TMUX_FIXTERM=true
-        ZSH_TMUX_AUTOSTART=true
+        ZSH_TMUX_AUTOSTART=false
         ZSH_TMUX_AUTOCONNECT=true
     " \
     OMZP::tmux \
