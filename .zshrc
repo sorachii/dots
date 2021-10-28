@@ -1,9 +1,15 @@
+#!/bin/zsh
+
+# # STARTUPTIME START
+# ZSH_INIT_TIME=$(date +%s%N)
+
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-set -o emacs
 
+# EDITOR:
 if command -v nvim > /dev/null; then
   EDITOR="nvim"
 elif command -v vim > /dev/null; then
@@ -11,19 +17,11 @@ elif command -v vim > /dev/null; then
 else
   EDITOR="vi"
 fi
-
 export EDITOR
 export VISUAL=${EDITOR}
 
-DISABLE_AUTO_TITLE="true"
-COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Turn on some useful options
+# OPTS:
 setopt AUTO_CD
 setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
 setopt ALWAYS_TO_END        # Move cursor to the end of a completed word.
@@ -35,149 +33,99 @@ setopt EXTENDED_GLOB        # Needed for file modification glob modifiers with c
 unsetopt MENU_COMPLETE      # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# zplug init
-if [ -e $HOME/.zplug/init.zsh ];then
-	source ~/.zplug/init.zsh
-	zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-	zplug "plugins/git", from:oh-my-zsh
-	zplug "zsh-users/zsh-completions"
-	zplug "b4b4r07/enhancd"
-
-	zplug "sharkdp/fd", \
-		from:gh-r, \
-		as:command, \
-		rename-to:fd
-
-	if ! zplug check; then
-		zplug install
-	fi
-
-	zplug load --verbose
-	eval "$(starship init zsh)"
-else
-	git clone https://github.com/zplug/zplug ~/.zplug
+# Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-# zsh completion strategies
-# zstyle ':completion:*' completer _expand _complete _ignored
-# zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
-# zstyle :compinstall filename '/home/megaman/.zshrc'
-# Defaults.
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+# End of Zinit's installer chunk
 
-# Use caching to make completion for commands such as dpkg and apt usable.
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/prezto/zcompcache"
 
-# Case-insensitive (all), partial-word, and then substring completion.
-if zstyle -t ':prezto:module:completion:*' case-sensitive; then
-	zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-	setopt CASE_GLOB
-else
-	zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-	unsetopt CASE_GLOB
-fi
+# PROMPT:
+zinit lucid for \
+    as"command" from"gh-r" atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' atload'eval "$(starship init zsh)"' bpick'*unknown-linux-gnu*' \
+    starship/starship
 
-# Group matches and describe.
-zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*:matches' group 'yes'
-zstyle ':completion:*:options' description 'yes'
-zstyle ':completion:*:options' auto-description '%d'
-zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
-zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' verbose yes
+setopt promptsubst
 
-# Fuzzy match mistyped completions.
-zstyle ':completion:*' completer _complete _match _approximate
-zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:approximate:*' max-errors 1 numeric
+# TMUX-PLUGIN:
+zinit lucid for \
+    atinit"
+        ZSH_TMUX_FIXTERM=true
+        ZSH_TMUX_AUTOSTART=true
+        ZSH_TMUX_AUTOCONNECT=true
+    " \
+    OMZP::tmux \
+    atinit"HIST_STAMPS=dd.mm.yyyy" \
+    OMZL::history.zsh \
 
-# Increase the number of errors based on the length of the typed word. But make
-# sure to cap (at 7) the max-errors to avoid hanging.
-zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
+# OMZ:
+zinit wait lucid for \
+  OMZL::compfix.zsh \
+  OMZL::completion.zsh \
+    atload"
+        alias ..='cd ..'
+        alias ...='cd ../..'
+        alias ....='cd ../../..'
+        alias .....='cd ../../../..'
+    " \
+  OMZL::directories.zsh \
+  OMZL::git.zsh \
+  OMZL::key-bindings.zsh \
+  OMZL::spectrum.zsh \
+  OMZL::termsupport.zsh \
+  OMZP::git \
+  OMZP::fzf \
+  djui/alias-tips \
+  chriskempson/base16-shell \
 
-# Don't complete unavailable commands.
-zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+# PLUGINS:
+    # light-mode atinit"ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20" atload"_zsh_autosuggest_start" \
+    #     zsh-users/zsh-autosuggestions \
+    #light-mode atinit" \
+zinit wait lucid for \
+    light-mode atinit"
+        typeset -gA FAST_HIGHLIGHT;
+        FAST_HIGHLIGHT[git-cmsg-len]=100;
+        zpcompinit;
+        zpcdreplay;" \
+        zdharma/fast-syntax-highlighting \
+    light-mode blockf atpull'zinit creinstall -q .' atinit"
+        zstyle ':completion:*' completer _expand _complete _ignored _approximate
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+        zstyle ':completion:*' menu select=2
+        zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+        zstyle ':completion:*:descriptions' format '-- %d --'
+        zstyle ':completion:*:processes' command 'ps -au$USER'
+        zstyle ':completion:complete:*:options' sort false
+        zstyle ':fzf-tab:complete:_zlua:*' query-string input
+        zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm,cmd -w -w'
+        zstyle ':fzf-tab:complete:kill:argument-rest' extra-opts --preview=$extract'ps --pid=$in[(w)1] -o cmd --no-headers -w -w' --preview-window=down:3:wrap
+        zstyle ':fzf-tab:complete:cd:*' extra-opts --preview=$extract'exa -1 --color=always ${~ctxt[hpre]}$in'" \
+        zsh-users/zsh-completions
 
-# Array completion element sorting.
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
-# Directories
-zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
-zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
-zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
-zstyle ':completion:*' squeeze-slashes true
+# PROGRAMS:
+zinit wait'1' lucid light-mode for \
+    pick"z.sh" \
+      knu/z \
+    as'command' atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' pick"bin/n" \
+      tj/n \
+		pick"init.sh" \
+	    b4b4r07/enhancd \
+		as'command' from'gh-r' \
+			junegunn/fzf \
 
-# History
-zstyle ':completion:*:history-words' stop yes
-zstyle ':completion:*:history-words' remove-all-dups yes
-zstyle ':completion:*:history-words' list false
-zstyle ':completion:*:history-words' menu yes
 
-# Environment Variables
-zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
-
-# Populate hostname completion. But allow ignoring custom entries from static
-# */etc/hosts* which might be uninteresting.
-zstyle -a ':prezto:module:completion:*:hosts' etc-host-ignores '_etc_host_ignores'
-
-zstyle -e ':completion:*:hosts' hosts 'reply=(
-${=${=${=${${(f)"$(cat {/etc/ssh/ssh_,~/.ssh/}known_hosts(|2)(N) 2> /dev/null)"}%%[#| ]*}//\]:[0-9]*/ }//,/ }//\[/ }
-${=${(f)"$(cat /etc/hosts(|)(N) <<(ypcat hosts 2> /dev/null))"}%%(\#${_etc_host_ignores:+|${(j:|:)~_etc_host_ignores}})*}
-	${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2> /dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
-	)'
-
-# Don't complete uninteresting users...
-zstyle ':completion:*:*:*:users' ignored-patterns \
-	adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
-	dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
-	hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
-	mailman mailnull mldonkey mysql nagios \
-	named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
-	operator pcap postfix postgres privoxy pulse pvm quagga radvd \
-	rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs '_*'
-
-# ... unless we really want to.
-zstyle '*' single-ignored show
-
-# Ignore multiple entries.
-zstyle ':completion:*:(rm|kill|diff):*' ignore-line other
-zstyle ':completion:*:rm:*' file-patterns '*:all-files'
-
-# Kill
-zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;36=0=01'
-zstyle ':completion:*:*:kill:*' menu yes select
-zstyle ':completion:*:*:kill:*' force-list always
-zstyle ':completion:*:*:kill:*' insert-ids single
-
-# Man
-zstyle ':completion:*:manuals' separate-sections true
-zstyle ':completion:*:manuals.(^1*)' insert-sections true
-
-# SSH/SCP/RSYNC
-zstyle ':completion:*:(ssh|scp|rsync):*' tag-order 'hosts:-host:host hosts:-domain:domain hosts:-ipaddr:ip\ address *'
-zstyle ':completion:*:(scp|rsync):*' group-order users files all-files hosts-domain hosts-host hosts-ipaddr
-zstyle ':completion:*:ssh:*' group-order users hosts-domain hosts-host users hosts-ipaddr
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.<->.<->' '^[-[:alnum:]]##(.[-[:alnum:]]##)##' '*@*'
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
-
-autoload -Uz compinit
-compinit
-
-# useful when working with git bare repo:
-# config config --local status.showUntrackedFiles no
-# after git bare setup, run `config checkout`
-
-# aliases:
+# ALIASES:
+alias v="$EDITOR"
 alias biggest='df -h /;cd /;find . -xdev -type f -size +50M -not -path "./local/*" -print 2>/dev/null | xargs du -sch | sort -h'
 alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
 alias cs='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME status'
@@ -188,11 +136,15 @@ if [[ ! -e ~/.zsh_aliases ]]; then
 	touch ~/.zsh_aliases
 fi
 
+
 # Attach shared folder on vmware player
 share_pls() {
 	sudo vmhgfs-fuse .host:/ /mnt -o subtype=vmhgfs-fuse,allow_other
 	ls -latrh /mnt/shared
 }
 
+
 source ~/.profile
 source ~/.zsh_aliases
+# printf "Time last: $((($(date +%s%N) - ZSH_INIT_TIME) / 1000000)) ms\n"
+# unset ZSH_INIT_TIME ZSH_LOADED_TIME ZSH_STARTUP_TIME
