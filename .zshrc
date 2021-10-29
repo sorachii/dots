@@ -19,6 +19,7 @@ else
 fi
 export EDITOR
 export VISUAL=${EDITOR}
+export TERM="screen-256color"
 
 
 # OPTS:
@@ -32,6 +33,7 @@ setopt AUTO_PARAM_SLASH     # If completed parameter is a directory, add a trail
 setopt EXTENDED_GLOB        # Needed for file modification glob modifiers with compinit.
 unsetopt MENU_COMPLETE      # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
+
 
 # Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -55,6 +57,7 @@ zinit lucid for \
 
 setopt promptsubst
 
+
 # TMUX-PLUGIN:
 zinit lucid for \
     atinit"
@@ -65,6 +68,7 @@ zinit lucid for \
     OMZP::tmux \
     atinit"HIST_STAMPS=dd.mm.yyyy" \
     OMZL::history.zsh \
+
 
 # OMZ:
 zinit wait lucid for \
@@ -85,6 +89,7 @@ zinit wait lucid for \
   OMZP::fzf \
   djui/alias-tips \
   chriskempson/base16-shell \
+
 
 # PLUGINS:
     # light-mode atinit"ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20" atload"_zsh_autosuggest_start" \
