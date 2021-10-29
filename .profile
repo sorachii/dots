@@ -31,7 +31,14 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 if [ -d "$HOME/.cargo/bin" ] ; then
-    PATH="$HOME/.cargo/bin:$PATH"
+    case ":${PATH}:" in
+        *:"$HOME/.cargo/bin":*)
+            ;;
+        *)
+            # Prepending path in case a system-installed rustc needs to be overridden
+            export PATH="$HOME/.cargo/bin:$PATH"
+            ;;
+    esac
 fi
 
 export PATH=$PATH
