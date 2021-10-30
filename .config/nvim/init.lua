@@ -27,7 +27,7 @@ require('packer').startup(function()
   use 'junegunn/seoul256.vim'
   use 'sainnhe/gruvbox-material'
   use 'ryanoasis/vim-devicons'
-  use {'hoob3rt/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+  use {'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
   use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate'}
   use 'ggandor/lightspeed.nvim'
   use 'justinmk/vim-dirvish'
