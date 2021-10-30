@@ -86,9 +86,8 @@ vim.cmd[[colorscheme gruvbox-material]]
 --Set statusbar
 require'lualine'.setup {
   options = {
-    icons_enabled = false,
-    -- theme = 'solarized_light',
-    theme = 'seoul256',
+    icons_enabled = true,
+    theme = 'gruvbox',
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {}
@@ -132,8 +131,8 @@ vim.api.nvim_exec([[
   augroup end
 ]], false)
 
---Add map to enter paste mode
-vim.o.pastetoggle="<F3>"
+--Add map to change background between light and dark
+vim.cmd[[nnoremap <expr><F3> &background == 'light' ? ':set bg=dark<cr>' : ':set bg=light<cr>']]
 
 ----Map blankline
 ----TODO: remove or make it so the indentation is by changed background-color,
@@ -254,16 +253,3 @@ require'nvim-treesitter.configs'.setup {
       additional_vim_regex_highlighting = false,
     },
   }
-
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-  local col = vim.fn.col('.') - 1
-  if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-    return true
-  else
-    return false
-  end
-end
