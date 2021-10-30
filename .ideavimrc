@@ -54,6 +54,7 @@ nnoremap <Up> :action Debugger.FramePanelPopup<CR>
 nnoremap <Down> :action StepInto<CR>
 nnoremap <A-Down> :action SmartStepInto<CR>
 nnoremap <A-d> :action JavaDebuggerActions<CR>
+nnoremap <C-a> :action GotoAction<CR>
 
 """ Idea specific settings ------------------
 set ideajoin
