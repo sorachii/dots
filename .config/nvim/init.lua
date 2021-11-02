@@ -21,6 +21,7 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
   use 'tpope/vim-commentary'
+  use 'junegunn/goyo.vim'
   use 'ludovicchabant/vim-gutentags'
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
   use 'eddyekofo94/gruvbox-flat.nvim'
@@ -40,6 +41,17 @@ require('packer').startup(function()
   use {'ms-jpq/coq_nvim', branch = 'coq'}
   use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
   use 'mfussenegger/nvim-jdtls' -- java lsp
+  use({
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    config = function()
+        -- -- Options (see available options below)
+        -- vim.g.rose_pine_variant = 'dawn'
+
+        -- Load colorscheme after options
+        vim.cmd('colorscheme rose-pine-dawn')
+    end
+})
 end)
 
 vim.o.scrolloff = 5
@@ -75,19 +87,20 @@ vim.g.background = dark
 -- vim.g.seoul256_background = 234
 -- vim.g.seoul256_light_background = 256
 -- vim.g.seoul256_srgb = 1
-vim.g.gruvbox_material_background = "hard"
-vim.cmd[[colorscheme gruvbox-material]]
+-- vim.g.gruvbox_material_background = "hard"
+-- vim.cmd[[colorscheme gruvbox-material]]
 -- vim.cmd[[colorscheme seoul256]]
 -- vim.cmd[[colorscheme seoul256-light]]
 
 --Thinkering with auto color change for lualine
 --vim.api.nvim_command("autocmd optionset background lua require('lualine').setup()")
 
+vim.api.nvim_set_keymap('n', '<F2>', [[<cmd>lua require('rose-pine.functions').toggle_variant({'moon', 'dawn'})<cr>]], { noremap = true, silent = true })
 --Set statusbar
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'gruvbox',
+    theme = 'rose-pine',
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {}
@@ -233,6 +246,10 @@ vim.api.nvim_exec([[
   autocmd FileType java lua require'jdtls_setup'.setup()
 augroup end
 ]], false)
+
+-- Set buffer switching keymaps
+vim.api.nvim_set_keymap('n', '<C-n>', '<cmd>bn<cr>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>bp<cr>', { noremap = true, silent = true})
 
 -- Map :Format to vim.lsp.buf.formatting()
 vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
