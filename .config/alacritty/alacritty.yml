@@ -6,28 +6,5 @@ font:
     family: Iosevka Nerd Font
     style: Regular
   size: 14
-colors:
-  cursor:
-    text: "#FFFFFF"
-    cursor: "#FDAB9F"
-  primary:
-    background: "#32302F"
-    foreground: "#d4be98"
-  normal:
-    black: "#282828"
-    red: "#ea6962"
-    green: "#98971a"
-    yellow: "#d79921"
-    blue: "#458588"
-    magenta: "#b16286"
-    cyan: "#689d6a"
-    white: "#a89984"
-  bright:
-    black: "#928374"
-    red: "#fb4934"
-    green: "#b8bb26"
-    yellow: "#fabd2f"
-    blue: "#83a598"
-    magenta: "#d3869b"
-    cyan: "#8ec07c"
-    white: "#ebdbb2"
+import:
+  - ~/.config/alacritty/themes/rose-pine.yml
