@@ -134,7 +134,7 @@ alias v="$EDITOR"
 alias biggest='df -h /;cd /;find . -xdev -type f -size +50M -not -path "./local/*" -print 2>/dev/null | xargs du -sch | sort -h'
 alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
 alias cs='config status'
-alias cdif='config diff'
+alias cdiff='config diff'
 alias ca='config add $@'
 alias caa='config add $(config diff --name-only)'
 alias cc='config commit'
