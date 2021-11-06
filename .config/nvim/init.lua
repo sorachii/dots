@@ -21,6 +21,7 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
   use 'tpope/vim-commentary'
+  use 'mhinz/vim-signify'
   use 'junegunn/goyo.vim'
   use 'ludovicchabant/vim-gutentags'
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
@@ -30,7 +31,14 @@ require('packer').startup(function()
   use 'ryanoasis/vim-devicons'
   use {'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
   use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate'}
-  use 'ggandor/lightspeed.nvim'
+  use {'phaazon/hop.nvim',
+    branch = 'v1',
+    config = function()
+      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+
+    end
+  }
+
   use 'justinmk/vim-dirvish'
   use 'mhinz/vim-startify'
   --use { 'lukas-reineke/indent-blankline.nvim', branch="master" }
@@ -46,10 +54,10 @@ require('packer').startup(function()
     as = 'rose-pine',
     config = function()
         -- -- Options (see available options below)
-        -- vim.g.rose_pine_variant = 'dawn'
+        vim.g.rose_pine_variant = 'dawn'
 
         -- Load colorscheme after options
-        vim.cmd('colorscheme rose-pine-dawn')
+        vim.cmd('colorscheme rose-pine')
     end
 })
 end)
@@ -133,6 +141,12 @@ vim.g.maplocalleader = " "
 --Remap for dealing with word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true})
 vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true})
+
+--Hop maps
+vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
+vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
+vim.api.nvim_set_keymap('n', 's', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
+vim.api.nvim_set_keymap('n', 'S', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
 
 
 --Remap escape to leave terminal mode
