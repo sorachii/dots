@@ -3,7 +3,7 @@
 # about this repo
 dots are managed as a git bare repo.
 
-## setup
+## setup(needs to be updated a bit)
 ```
 echo "$HOME/git/dots" >> ~/.gitignore
 git clone https://github.com/sorachii/dots.git ~/git/dots
