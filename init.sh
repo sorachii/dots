@@ -6,7 +6,7 @@ if command -v apt > /dev/null; then
 	sudo apt update
 	sudo apt upgrade -y
 	printf "\e[1;34mInstalling essential tools.\e[0m\n"
-	sudo apt install zsh tmux python3-pip python3-venv ripgrep curl universal-ctags nodejs npm -y
+	sudo apt install zsh tmux python3-pip python3-venv ripgrep curl universal-ctags nodejs -y
 	# build requirements for neovim
 	sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen -y
 elif command -v yum > /dev/null; then
