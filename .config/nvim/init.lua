@@ -18,49 +18,60 @@ local use = require('packer').use
 require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
   use 'tpope/vim-surround'
+  use 'tpope/vim-rsi'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
   use 'tpope/vim-commentary'
   use 'mhinz/vim-signify'
   use 'junegunn/goyo.vim'
   use 'ludovicchabant/vim-gutentags'
+  use 'nvim-treesitter/playground'
+  use {'kevinhwang91/nvim-bqf', ft = 'qf'}
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
-  use 'eddyekofo94/gruvbox-flat.nvim'
-  use 'junegunn/seoul256.vim'
-  use 'sainnhe/gruvbox-material'
-  use 'ryanoasis/vim-devicons'
-  use {'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
   use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate'}
-  use {'phaazon/hop.nvim',
-    branch = 'v1',
-    config = function()
-      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-
-    end
-  }
-
   use 'justinmk/vim-dirvish'
-  use 'mhinz/vim-startify'
-  --use { 'lukas-reineke/indent-blankline.nvim', branch="master" }
   -- use 'lewis6991/gitsigns.nvim'
-  use 'sheerun/vim-polyglot'
+  -- use 'sheerun/vim-polyglot'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'neovim/nvim-lspconfig'
   use {'ms-jpq/coq_nvim', branch = 'coq'}
   use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
   use 'mfussenegger/nvim-jdtls' -- java lsp
-  use({
-    'rose-pine/neovim',
-    as = 'rose-pine',
+  use 'nathom/filetype.nvim'
+  use 'mhinz/vim-startify'
+  use {'folke/which-key.nvim', config = function()
+    require("which-key").setup{ }
+  end }
+
+  use {'lewis6991/impatient.nvim', config = function()
+    require('impatient')
+  end }
+
+  use {'phaazon/hop.nvim',
+    branch = 'v1',
     config = function()
+      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    end }
+
+  -- Aesthetic
+  use 'eddyekofo94/gruvbox-flat.nvim'
+  use 'junegunn/seoul256.vim'
+  use 'sainnhe/gruvbox-material'
+  use 'ryanoasis/vim-devicons'
+  use {'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+  use({
+      '~/git/rose-pine-markdown-fork',
+      as = 'rose-pine-md',
+      config = function()
         -- -- Options (see available options below)
         vim.g.rose_pine_variant = 'dawn'
 
         -- Load colorscheme after options
         vim.cmd('colorscheme rose-pine')
-    end
-})
+      end
+  })
 end)
+
 
 vim.o.scrolloff = 5
 vim.o.wrap = false
@@ -91,14 +102,11 @@ vim.wo.signcolumn="yes"
 
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
-vim.g.background = dark
+vim.g.background = light
 -- vim.g.seoul256_background = 234
 -- vim.g.seoul256_light_background = 256
 -- vim.g.seoul256_srgb = 1
 -- vim.g.gruvbox_material_background = "hard"
--- vim.cmd[[colorscheme gruvbox-material]]
--- vim.cmd[[colorscheme seoul256]]
--- vim.cmd[[colorscheme seoul256-light]]
 
 --Thinkering with auto color change for lualine
 --vim.api.nvim_command("autocmd optionset background lua require('lualine').setup()")
@@ -185,6 +193,8 @@ require('telescope').setup {
 require('telescope').load_extension('fzf')
 
 --Add leader shortcuts
+vim.api.nvim_set_keymap('n', '<F5>', [[<cmd>lua require('telescope.builtin').highlights()<cr>]], { noremap = true, silent = true})
+
 vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>F', [[<cmd>lua require('telescope.builtin').find_files{ cwd = "~"}<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
@@ -264,6 +274,8 @@ augroup end
 -- Set buffer switching keymaps
 vim.api.nvim_set_keymap('n', '<C-n>', '<cmd>bn<cr>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>bp<cr>', { noremap = true, silent = true})
+
+vim.api.nvim_set_keymap('n', '<F10>', '<cmd>TSHighlightCapturesUnderCursor<cr>', { noremap = true, silent = true})
 
 -- Map :Format to vim.lsp.buf.formatting()
 vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
