@@ -39,19 +39,16 @@ require('packer').startup(function()
   use 'mfussenegger/nvim-jdtls' -- java lsp
   use 'nathom/filetype.nvim'
   use 'mhinz/vim-startify'
+  use 'ggandor/lightspeed.nvim'
+
   use {'folke/which-key.nvim', config = function()
     require("which-key").setup{ }
   end }
 
+
   use {'lewis6991/impatient.nvim', config = function()
     require('impatient')
   end }
-
-  use {'phaazon/hop.nvim',
-    branch = 'v1',
-    config = function()
-      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-    end }
 
   -- Aesthetic
   use 'eddyekofo94/gruvbox-flat.nvim'
@@ -108,9 +105,6 @@ vim.g.background = light
 -- vim.g.seoul256_srgb = 1
 -- vim.g.gruvbox_material_background = "hard"
 
---Thinkering with auto color change for lualine
---vim.api.nvim_command("autocmd optionset background lua require('lualine').setup()")
-
 vim.api.nvim_set_keymap('n', '<F2>', [[<cmd>lua require('rose-pine.functions').toggle_variant({'moon', 'dawn'})<cr>]], { noremap = true, silent = true })
 --Set statusbar
 require'lualine'.setup {
@@ -149,13 +143,6 @@ vim.g.maplocalleader = " "
 --Remap for dealing with word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true})
 vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true})
-
---Hop maps
-vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('n', 's', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
-vim.api.nvim_set_keymap('n', 'S', "<cmd>lua require'hop'.hint_char2({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
-
 
 --Remap escape to leave terminal mode
 vim.api.nvim_exec([[
