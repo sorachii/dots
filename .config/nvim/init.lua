@@ -41,6 +41,11 @@ require('packer').startup(function()
   use 'mhinz/vim-startify'
   use 'ggandor/lightspeed.nvim'
 
+  -- Markdown plugins
+  use 'godlygeek/tabular'
+  use 'elzr/vim-json'
+  use 'plasticboy/vim-markdown'
+
   use {'folke/which-key.nvim', config = function()
     require("which-key").setup{ }
   end }
@@ -69,6 +74,11 @@ require('packer').startup(function()
   })
 end)
 
+
+-- Tab expansion
+vim.bo.expandtab = true
+vim.bo.tabstop = 4
+vim.bo.softtabstop = 4
 
 vim.o.scrolloff = 5
 vim.o.wrap = false
