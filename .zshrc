@@ -139,6 +139,9 @@ alias ca='config add $@'
 alias caa='config add $(config diff --name-only)'
 alias cc='config commit'
 alias cpush='config push'
+
+j() { javac $1.java && java $1 ; }
+
 if [[ ! -e ~/.zsh_aliases ]]; then
 	touch ~/.zsh_aliases
 fi
