@@ -62,7 +62,7 @@ require('packer').startup(function()
   use 'ryanoasis/vim-devicons'
   use {'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
   use({
-      '~/git/rose-pine-markdown-fork',
+      'rose-pine/neovim',
       as = 'rose-pine-md',
       config = function()
         -- -- Options (see available options below)
