@@ -1,3 +1,5 @@
+vim.cmd("set background=light")
+
 -- Install packer
 local execute = vim.api.nvim_command
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
@@ -63,10 +65,9 @@ require('packer').startup(function()
   use {'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
   use({
       'rose-pine/neovim',
-      as = 'rose-pine-md',
+      as = 'rose-pine',
       config = function()
         -- -- Options (see available options below)
-        vim.g.rose_pine_variant = 'dawn'
 
         -- Load colorscheme after options
         vim.cmd('colorscheme rose-pine')
