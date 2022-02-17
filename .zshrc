@@ -15,6 +15,7 @@ COMPLETION_WAITING_DOTS="true"
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+source ~/.profile
 # EDITOR:
 if command -v nvim > /dev/null; then
   EDITOR="nvim"
@@ -54,7 +55,6 @@ unsetopt MENU_COMPLETE          # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL           # Disable start/stop characters in shell editor.
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source ~/.profile
 
 if command -v starship > /dev/null; then 
         eval "$(starship init zsh)"
