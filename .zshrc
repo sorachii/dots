@@ -10,11 +10,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
 source ~/.profile
 # EDITOR:
 if command -v nvim > /dev/null; then
@@ -69,48 +64,21 @@ if [ -e $HOME/.zplug/init.zsh ];then
 	zplug "zsh-users/zsh-completions"
 	zplug "b4b4r07/enhancd"
 
-	zplug "sharkdp/fd", \
-		from:gh-r, \
-		as:command, \
-		rename-to:fd
-
 	if ! zplug check; then
 		zplug install
 	fi
 
 	zplug load --verbose
-else
-	git clone https://github.com/zplug/zplug ~/.zplug
+#else
+#	git clone https://github.com/zplug/zplug ~/.zplug
 fi
 
-# # TMUX-PLUGIN:
-# zinit lucid for \
-#     atinit"
-#         ZSH_TMUX_FIXTERM=true
-#         ZSH_TMUX_AUTOSTART=false
-#         ZSH_TMUX_AUTOCONNECT=true
-#     " \
-#     OMZP::tmux \
-#     atinit"HIST_STAMPS=dd.mm.yyyy" \
-#     OMZL::history.zsh \
-
-
-# # PROGRAMS:
-# zinit wait'1' lucid light-mode for \
-#     pick"z.sh" \
-#       knu/z \
-#     as'command' atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' pick"bin/n" \
-#       tj/n \
-# 		pick"init.sh" \
-# 	    b4b4r07/enhancd \
-# 		as'command' from'gh-r' \
-# 			junegunn/fzf \
-
-# useful when working with git bare repo:
-# config config --local status.showUntrackedFiles no
-# after git bare setup, run `config checkout`
-
 # ALIASES:
+if [[ ! -e ~/.zsh_aliases ]]; then
+	touch ~/.zsh_aliases
+fi
+source ~/.zsh_aliases
+
 alias v="$EDITOR"
 alias l="ls -latrh"
 alias ll="ls -lh"
@@ -123,18 +91,24 @@ alias caa='config add $(config diff --name-only)'
 alias cc='config commit'
 alias cpush='config push'
 
-if [[ ! -e ~/.zsh_aliases ]]; then
-	touch ~/.zsh_aliases
-fi
-source ~/.zsh_aliases
-
 j() { javac $1.java && java $1 ; }
 
+# Loading completions
 if [[ -e ~/.zsh_completions ]]; then
     source ~/.zsh_completions
 fi
+#autoload -Uz compinit; compinit
 
-autoload -Uz compinit
-compinit
+# Make <c-x e> open the current line in your $EDITOR
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+
+[[ -f ~/z.sh ]] && source z.sh
+
+# useful when working with git bare repo:
+# config config --local status.showUntrackedFiles no
+# after git bare setup, run `config checkout`
+
 # printf "Time last: $((($(date +%s%N) - ZSH_INIT_TIME) / 1000000)) ms\n"
 # unset ZSH_INIT_TIME ZSH_LOADED_TIME ZSH_STARTUP_TIME
