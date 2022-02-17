@@ -41,4 +41,4 @@ if [ -d "$HOME/.cargo/bin" ] ; then
     esac
 fi
 
-export PATH=$PATH
+export PATH=/usr/local/bin:$PATH
