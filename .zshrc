@@ -7,7 +7,13 @@ HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_AUTO_TITLE="true"
+COMPLETION_WAITING_DOTS="true"
 
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # EDITOR:
 if command -v nvim > /dev/null; then
@@ -23,114 +29,91 @@ export TERM="screen-256color"
 
 
 # OPTS:
+setopt EMACS
 setopt AUTO_CD
-setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
-setopt ALWAYS_TO_END        # Move cursor to the end of a completed word.
-setopt PATH_DIRS            # Perform path search even on command names with slashes.
-setopt AUTO_MENU            # Show completion menu on a successive tab press.
-setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
-setopt AUTO_PARAM_SLASH     # If completed parameter is a directory, add a trailing slash.
-setopt EXTENDED_GLOB        # Needed for file modification glob modifiers with compinit.
-unsetopt MENU_COMPLETE      # Do not autoselect the first completion entry.
-unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
+setopt COMPLETE_IN_WORD         # Complete from both ends of a word.
+setopt ALWAYS_TO_END            # Move cursor to the end of a completed word.
+setopt PATH_DIRS                # Perform path search even on command names with slashes.
+setopt AUTO_MENU                # Show completion menu on a successive tab press.
+setopt AUTO_LIST                # Automatically list choices on ambiguous completion.
+setopt AUTO_PARAM_SLASH         # If completed parameter is a directory, add a trailing slash.
+setopt EXTENDED_GLOB            # Needed for file modification glob modifiers with compinit.
+setopt BANG_HIST                # Treat the '!' character specially during expansion.
+setopt INC_APPEND_HISTORY       # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY            # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST   # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS         # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS     # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS        # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE        # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS        # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS       # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY              # Don't execute immediately upon history expansion.
+setopt PROMPTSUBST              # Parameter expansion, command substitution and arithmetic expansion are performed in prompts. Substitutions within prompts do not affect the command status.
+unsetopt MENU_COMPLETE          # Do not autoselect the first completion entry.
+unsetopt FLOW_CONTROL           # Disable start/stop characters in shell editor.
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/.profile
 
-# Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+if command -v starship > /dev/null; then 
+        eval "$(starship init zsh)"
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-# End of Zinit's installer chunk
+# zplug init
+if [ -e $HOME/.zplug/init.zsh ];then
+	source ~/.zplug/init.zsh
+	zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+	zplug "plugins/git", from:oh-my-zsh
+	zplug "plugins/tmux", from:oh-my-zsh
+	zplug "zsh-users/zsh-completions"
+	zplug "b4b4r07/enhancd"
+
+	zplug "sharkdp/fd", \
+		from:gh-r, \
+		as:command, \
+		rename-to:fd
+
+	if ! zplug check; then
+		zplug install
+	fi
+
+	zplug load --verbose
+else
+	git clone https://github.com/zplug/zplug ~/.zplug
+fi
+
+# # TMUX-PLUGIN:
+# zinit lucid for \
+#     atinit"
+#         ZSH_TMUX_FIXTERM=true
+#         ZSH_TMUX_AUTOSTART=false
+#         ZSH_TMUX_AUTOCONNECT=true
+#     " \
+#     OMZP::tmux \
+#     atinit"HIST_STAMPS=dd.mm.yyyy" \
+#     OMZL::history.zsh \
 
 
-# PROMPT:
-zinit lucid for \
-    as"command" from"gh-r" atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' atload'eval "$(starship init zsh)"' bpick'*unknown-linux-gnu*' \
-    starship/starship
+# # PROGRAMS:
+# zinit wait'1' lucid light-mode for \
+#     pick"z.sh" \
+#       knu/z \
+#     as'command' atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' pick"bin/n" \
+#       tj/n \
+# 		pick"init.sh" \
+# 	    b4b4r07/enhancd \
+# 		as'command' from'gh-r' \
+# 			junegunn/fzf \
 
-setopt promptsubst
-
-
-# TMUX-PLUGIN:
-zinit lucid for \
-    atinit"
-        ZSH_TMUX_FIXTERM=true
-        ZSH_TMUX_AUTOSTART=false
-        ZSH_TMUX_AUTOCONNECT=true
-    " \
-    OMZP::tmux \
-    atinit"HIST_STAMPS=dd.mm.yyyy" \
-    OMZL::history.zsh \
-
-
-# OMZ:
-zinit wait lucid for \
-  OMZL::compfix.zsh \
-  OMZL::completion.zsh \
-    atload"
-        alias ..='cd ..'
-        alias ...='cd ../..'
-        alias ....='cd ../../..'
-        alias .....='cd ../../../..'
-    " \
-  OMZL::directories.zsh \
-  OMZL::git.zsh \
-  OMZL::key-bindings.zsh \
-  OMZL::spectrum.zsh \
-  OMZL::termsupport.zsh \
-  OMZP::git \
-  OMZP::fzf \
-  djui/alias-tips \
-  chriskempson/base16-shell \
-
-
-# PLUGINS:
-    # light-mode atinit"ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20" atload"_zsh_autosuggest_start" \
-    #     zsh-users/zsh-autosuggestions \
-    #light-mode atinit" \
-zinit wait lucid for \
-    light-mode atinit"
-        typeset -gA FAST_HIGHLIGHT;
-        FAST_HIGHLIGHT[git-cmsg-len]=100;
-        zpcompinit;
-        zpcdreplay;" \
-        zdharma/fast-syntax-highlighting \
-    light-mode blockf atpull'zinit creinstall -q .' atinit"
-        zstyle ':completion:*' completer _expand _complete _ignored _approximate
-        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-        zstyle ':completion:*' menu select=2
-        zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-        zstyle ':completion:*:descriptions' format '-- %d --'
-        zstyle ':completion:*:processes' command 'ps -au$USER'
-        zstyle ':completion:complete:*:options' sort false
-        zstyle ':fzf-tab:complete:_zlua:*' query-string input
-        zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm,cmd -w -w'
-        zstyle ':fzf-tab:complete:kill:argument-rest' extra-opts --preview=$extract'ps --pid=$in[(w)1] -o cmd --no-headers -w -w' --preview-window=down:3:wrap
-        zstyle ':fzf-tab:complete:cd:*' extra-opts --preview=$extract'exa -1 --color=always ${~ctxt[hpre]}$in'" \
-        zsh-users/zsh-completions
-
-
-# PROGRAMS:
-zinit wait'1' lucid light-mode for \
-    pick"z.sh" \
-      knu/z \
-    as'command' atinit'export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"' pick"bin/n" \
-      tj/n \
-		pick"init.sh" \
-	    b4b4r07/enhancd \
-		as'command' from'gh-r' \
-			junegunn/fzf \
-
+# useful when working with git bare repo:
+# config config --local status.showUntrackedFiles no
+# after git bare setup, run `config checkout`
 
 # ALIASES:
 alias v="$EDITOR"
+alias l="ls -latrh"
+alias ll="ls -lh"
 alias biggest='df -h /;cd /;find . -xdev -type f -size +50M -not -path "./local/*" -print 2>/dev/null | xargs du -sch | sort -h'
 alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
 alias cs='config status'
@@ -140,21 +123,18 @@ alias caa='config add $(config diff --name-only)'
 alias cc='config commit'
 alias cpush='config push'
 
-j() { javac $1.java && java $1 ; }
-
 if [[ ! -e ~/.zsh_aliases ]]; then
 	touch ~/.zsh_aliases
 fi
-
-
-# Attach shared folder on vmware player
-share_pls() {
-	sudo vmhgfs-fuse .host:/ /mnt -o subtype=vmhgfs-fuse,allow_other
-	ls -latrh /mnt/shared
-}
-
-
-source ~/.profile
 source ~/.zsh_aliases
+
+j() { javac $1.java && java $1 ; }
+
+if [[ -e ~/.zsh_completions ]]; then
+    source ~/.zsh_completions
+fi
+
+autoload -Uz compinit
+compinit
 # printf "Time last: $((($(date +%s%N) - ZSH_INIT_TIME) / 1000000)) ms\n"
 # unset ZSH_INIT_TIME ZSH_LOADED_TIME ZSH_STARTUP_TIME
