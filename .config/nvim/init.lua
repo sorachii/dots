@@ -1,4 +1,4 @@
-vim.cmd("set background=light")
+-- vim.cmd("set background=light")
 
 -- Install packer
 local execute = vim.api.nvim_command
@@ -60,21 +60,22 @@ require('packer').startup(function()
   -- Aesthetic
   use 'eddyekofo94/gruvbox-flat.nvim'
   use 'junegunn/seoul256.vim'
-  use 'sainnhe/gruvbox-material'
-  use 'ryanoasis/vim-devicons'
-  use {'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons'}
-  use({
-      'rose-pine/neovim',
-      as = 'rose-pine',
-      config = function()
-        -- -- Options (see available options below)
-
-        -- Load colorscheme after options
-        vim.cmd('colorscheme rose-pine')
-      end
+  use ({'sainnhe/gruvbox-material',
+	  config = function()
+		vim.cmd('colorscheme gruvbox-material')
+	  end
   })
-end)
 
+  use 'ryanoasis/vim-devicons'
+  use ({'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons',
+	config = function()
+		require('lualine').setup({
+			options = {
+				theme = 'gruvbox-material'
+			}
+		})
+	end})
+end)
 
 -- Tab expansion
 vim.bo.expandtab = true
@@ -110,41 +111,6 @@ vim.wo.signcolumn="yes"
 
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
-vim.g.background = light
--- vim.g.seoul256_background = 234
--- vim.g.seoul256_light_background = 256
--- vim.g.seoul256_srgb = 1
--- vim.g.gruvbox_material_background = "hard"
-
-vim.api.nvim_set_keymap('n', '<F2>', [[<cmd>lua require('rose-pine.functions').toggle_variant({'moon', 'dawn'})<cr>]], { noremap = true, silent = true })
---Set statusbar
-require'lualine'.setup {
-  options = {
-    icons_enabled = true,
-    theme = 'rose-pine',
-    component_separators = {'', ''},
-    section_separators = {'', ''},
-    disabled_filetypes = {}
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  extensions = {'quickfix', 'fugitive', 'fzf'}
-}
 
 --Remap space as leader key
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
