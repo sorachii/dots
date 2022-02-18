@@ -104,7 +104,7 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
 
-[[ -f ~/z.sh ]] && source z.sh
+[[ -f ~/z.sh ]] && . ~/z.sh
 
 # useful when working with git bare repo:
 # config config --local status.showUntrackedFiles no
