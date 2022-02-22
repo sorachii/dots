@@ -16,8 +16,16 @@ else
   EDITOR="vi"
 fi
 
+
+# ALIASES:
+if [[ ! -e ~/.shell_aliases ]]; then
+	touch ~/.shell_aliases
+fi
+source ~/.shell_aliases
+
 alias ipb="ip -brief address"
-alias v=$EDITOR
+alias l="ls -latrh"
+alias v=${EDITOR}
 alias d="docker"
 alias biggest="du -h --max-depth=1 | sort -h"
 alias j="jobs"
