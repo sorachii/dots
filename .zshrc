@@ -74,10 +74,10 @@ if [ -e $HOME/.zplug/init.zsh ];then
 fi
 
 # ALIASES:
-if [[ ! -e ~/.zsh_aliases ]]; then
-	touch ~/.zsh_aliases
+if [[ ! -e ~/.shell_aliases ]]; then
+	touch ~/.shell_aliases
 fi
-source ~/.zsh_aliases
+source ~/.shell_aliases
 
 alias v="$EDITOR"
 alias l="ls -latrh"
