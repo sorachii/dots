@@ -21,7 +21,7 @@ else
 fi
 export EDITOR
 export VISUAL=${EDITOR}
-export TERM="screen-256color"
+#export TERM="screen-256color"
 
 
 # OPTS:
@@ -60,7 +60,7 @@ if [ -e $HOME/.zplug/init.zsh ];then
 	source ~/.zplug/init.zsh
 	zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 	zplug "plugins/git", from:oh-my-zsh
-	zplug "plugins/tmux", from:oh-my-zsh
+	#zplug "plugins/tmux", from:oh-my-zsh
 	zplug "zsh-users/zsh-completions"
 	zplug "b4b4r07/enhancd"
 
@@ -85,6 +85,7 @@ alias ll="ls -lh"
 alias biggest='df -h /;cd /;find . -xdev -type f -size +50M -not -path "./local/*" -print 2>/dev/null | xargs du -sch | sort -h'
 alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
 alias cs='config status'
+alias cshow='config show'
 alias cdiff='config diff'
 alias ca='config add $@'
 alias caa='config add $(config diff --name-only)'
