@@ -8,14 +8,12 @@ dots are managed as a git bare repo.
 echo "$HOME/git/dots" >> ~/.gitignore
 git clone https://github.com/sorachii/dots.git ~/git/dots
 cd !$
+# init.sh installs some useful software. Mostly curl, zsh, fzf are necessary for a pleasant experience.
 chmod +x init.sh
 ./init.sh
-zsh
-# IN ZSH:
-# this places the config files to their respective location
-config checkout -f
+git --git-dir=$HOME/git/dots/.git --work-tree=$HOME checkout -f
 # useful for tracking config files with bare git repo:
-config config --local status.showUntrackedFiles no
+git --git-dir=$HOME/git/dots/.git --work-tree=$HOME config --local status.showUntrackedFiles no
 ```
 
 ---
