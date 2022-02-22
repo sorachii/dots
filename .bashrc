@@ -34,7 +34,7 @@ export EDITOR
 export VISUAL=$EDITOR
 
 # Personal binaries
-export PATH=${PATH}:~/bin:~/.local/bin
+export PATH=~/.local/bin:${PATH}:~/bin
 
 # 'Safe' version of __git_ps1 to avoid errors on systems that don't have it
 function gitPrompt {
@@ -85,6 +85,9 @@ gitC="${txtpur}"
 pointerC="${txtgrn}"
 normalC="${txtwht}"
 
+# Sourcing fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # Red name for root
 if [ "${UID}" -eq "0" ]; then 
   nameC="${txtred}" 
@@ -97,7 +100,9 @@ else
   export PS1="${nameC}\u${atC}@${hostC}\h:${pathC}\w${pointerC}▶${normalC} "
 fi
 
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+if command -v starship > /dev/null; then 
+        eval "$(starship init bash)"
+fi
+##THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+#export SDKMAN_DIR="$HOME/.sdkman"
+#[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
