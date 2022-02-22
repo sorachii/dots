@@ -23,13 +23,24 @@ if [[ ! -e ~/.shell_aliases ]]; then
 fi
 source ~/.shell_aliases
 
-alias ipb="ip -brief address"
+alias v="$EDITOR"
 alias l="ls -latrh"
-alias v=${EDITOR}
+alias ll="ls -lh"
+alias biggest='df -h /;cd /;find . -xdev -type f -size +50M -not -path "./local/*" -print 2>/dev/null | xargs du -sch | sort -h'
+alias ipb="ip -brief address"
 alias d="docker"
-alias biggest="du -h --max-depth=1 | sort -h"
 alias j="jobs"
 alias follow="tail -f -n +1"
+
+# config aliases
+alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
+alias cs='config status'
+alias cshow='config show'
+alias cdiff='config diff'
+alias ca='config add $@'
+alias caa='config add $(config diff --name-only)'
+alias cc='config commit'
+alias cpush='config push'
 
 # cd aliases
 alias ..='cd ..'
