@@ -16,7 +16,6 @@ else
   EDITOR="vi"
 fi
 
-
 # ALIASES:
 if [[ ! -e ~/.shell_aliases ]]; then
 	touch ~/.shell_aliases
@@ -43,6 +42,7 @@ alias cc='config commit'
 alias cpush='config push'
 
 # cd aliases
+alias ~='cd ~'
 alias ..='cd ..'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
@@ -53,12 +53,8 @@ export EDITOR
 export VISUAL=$EDITOR
 
 # Personal binaries
-export PATH=~/.local/bin:${PATH}:~/bin
-
-# 'Safe' version of __git_ps1 to avoid errors on systems that don't have it
-function gitPrompt {
-  command -v __git_ps1 > /dev/null && __git_ps1 " (%s)"
-}
+#export PATH=~/.local/bin:${PATH}:~/bin
+source ~/.profile
 
 # Colours have names too. Stolen from Arch wiki
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -94,34 +90,24 @@ bakpur='\[\e[45m\]'   # Purple
 bakcyn='\[\e[46m\]'   # Cyan
 bakwht='\[\e[47m\]'   # White
 txtrst='\[\e[0m\]'    # Text Reset
+salmon='\[\e[38;5;216m\]'       # 256 color Salmon
+lgtgrn='\[\e[38;5;192m\]'       # 256 color Light Green
 
-# Prompt colours
-atC="${txtpur}"
-nameC="${txtpur}"
-hostC="${txtpur}"
-pathC="${txtgrn}"
-gitC="${txtpur}"
-pointerC="${txtgrn}"
-normalC="${txtwht}"
 
 # Sourcing fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Red name for root
-if [ "${UID}" -eq "0" ]; then 
-  nameC="${txtred}" 
-fi
+# # Red name for root
+# if [ "${UID}" -eq "0" ]; then 
+#   nameC="${bldred}" 
+# fi
 
-# Patent Pending Prompt
-if command -v __git_ps1 > /dev/null; then
-  export PS1="${nameC}\u${atC}@${hostC}\h:${pathC}\w${gitC}\$(gitPrompt)${pointerC}▶${normalC} "
-else
-  export PS1="${nameC}\u${atC}@${hostC}\h:${pathC}\w${pointerC}▶${normalC} "
-fi
+function prompt_command() {
+        if [ $? = 0 ]; then
+                PS1="\n${salmon}\u${salmon}@${salmon}\h${salmon} ${salmon}\w${lgtgrn}\n❯ ${txtrst}"
+        else
+                PS1="\n${salmon}\u${salmon}@${salmon}\h${salmon} ${salmon}\w${txtred}\n❯ ${txtrst}"
+        fi
+}
 
-if command -v starship > /dev/null; then 
-        eval "$(starship init bash)"
-fi
-##THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-#export SDKMAN_DIR="$HOME/.sdkman"
-#[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+PROMPT_COMMAND=prompt_command
