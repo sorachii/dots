@@ -8,6 +8,8 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+[[ -f ~/z.sh ]] && . ~/z.sh
+
 if command -v nvim > /dev/null; then
   EDITOR="nvim"
 elif command -v vim > /dev/null; then
