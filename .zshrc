@@ -51,9 +51,9 @@ unsetopt FLOW_CONTROL           # Disable start/stop characters in shell editor.
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-if command -v starship > /dev/null; then 
-        eval "$(starship init zsh)"
-fi
+# if command -v starship > /dev/null; then 
+#         eval "$(starship init zsh)"
+# fi
 
 # zplug init
 if [ -e $HOME/.zplug/init.zsh ];then
@@ -63,6 +63,8 @@ if [ -e $HOME/.zplug/init.zsh ];then
 	#zplug "plugins/tmux", from:oh-my-zsh
 	zplug "zsh-users/zsh-completions"
 	zplug "b4b4r07/enhancd"
+	zplug 'mafredri/zsh-async', from:'github'
+	zplug 'sindresorhus/pure', use:'pure.zsh', from:'github', as:'theme'
 
 	if ! zplug check; then
 		zplug install
