@@ -1,0 +1,25 @@
+
+alias biggest='df -h /;cd /;find . -xdev -type f -size +50M -not -path "./local/*" -print 2>/dev/null | xargs du -sch | sort -h'
+alias d="docker"
+alias follow="tail -f -n +1"
+alias ipb="ip -brief address"
+alias ll="ls -lh"
+alias l="ls -latrh"
+alias v="$EDITOR"
+
+# config aliases
+alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
+alias cs='config status'
+alias cshow='config show'
+alias cdiff='config diff'
+alias cpush='config push --verbose'
+alias ca='config add $@'
+alias caa='config add $(config diff --name-only)'
+alias cc='config commit'
+
+# cd aliases
+alias ~='cd ~'
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'

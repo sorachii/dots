@@ -19,43 +19,15 @@ else
 fi
 
 # ALIASES:
+if [[ ! -e ~/.local_aliases ]]; then
+	touch ~/.local_aliases
+fi
+source ~/.local_aliases
+
 if [[ ! -e ~/.shell_aliases ]]; then
 	touch ~/.shell_aliases
 fi
 source ~/.shell_aliases
-
-alias v="$EDITOR"
-alias l="ls -latrh"
-alias ll="ls -lh"
-alias biggest='df -h /;cd /;find . -xdev -type f -size +50M -not -path "./local/*" -print 2>/dev/null | xargs du -sch | sort -h'
-alias ipb="ip -brief address"
-alias d="docker"
-alias j="jobs"
-alias follow="tail -f -n +1"
-
-# config aliases
-alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
-alias cs='config status'
-alias cshow='config show'
-alias cdiff='config diff'
-alias ca='config add $@'
-alias caa='config add $(config diff --name-only)'
-alias cc='config commit'
-alias cpush='config push'
-
-# cd aliases
-alias ~='cd ~'
-alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
-alias .....='cd ../../../../'
-
-export TERM=xterm-256color
-export EDITOR
-export VISUAL=$EDITOR
-
-# Personal binaries
-#export PATH=~/.local/bin:${PATH}:~/bin
 source ~/.profile
 
 # Colours have names too. Stolen from Arch wiki
@@ -111,5 +83,9 @@ function prompt_command() {
                 PS1="\n${salmon}\u${salmon}@${salmon}\h${salmon} ${salmon}\w${txtred}\n❯ ${txtrst}"
         fi
 }
+
+export TERM=xterm-256color
+export EDITOR
+export VISUAL=$EDITOR
 
 PROMPT_COMMAND=prompt_command

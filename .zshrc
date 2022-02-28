@@ -76,23 +76,15 @@ if [ -e $HOME/.zplug/init.zsh ];then
 fi
 
 # ALIASES:
+if [[ ! -e ~/.local_aliases ]]; then
+	touch ~/.local_aliases
+fi
+source ~/.local_aliases
+
 if [[ ! -e ~/.shell_aliases ]]; then
 	touch ~/.shell_aliases
 fi
 source ~/.shell_aliases
-
-alias v="$EDITOR"
-alias l="ls -latrh"
-alias ll="ls -lh"
-alias biggest='df -h /;cd /;find . -xdev -type f -size +50M -not -path "./local/*" -print 2>/dev/null | xargs du -sch | sort -h'
-alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
-alias cs='config status'
-alias cshow='config show'
-alias cdiff='config diff'
-alias ca='config add $@'
-alias caa='config add $(config diff --name-only)'
-alias cc='config commit'
-alias cpush='config push'
 
 j() { javac $1.java && java $1 ; }
 
