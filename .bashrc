@@ -66,6 +66,7 @@ bakwht='\[\e[47m\]'   # White
 txtrst='\[\e[0m\]'    # Text Reset
 salmon='\[\e[38;5;216m\]'       # 256 color Salmon
 lgtgrn='\[\e[38;5;192m\]'       # 256 color Light Green
+lgtgry='\[\e[38;5;245m\]'       # 256 color Dark Grey
 
 
 # Sourcing fzf
@@ -76,11 +77,15 @@ lgtgrn='\[\e[38;5;192m\]'       # 256 color Light Green
 #   nameC="${bldred}" 
 # fi
 
+function gitPrompt {
+  command -v __git_ps1 > /dev/null && __git_ps1 " (%s)"
+}
+
 function prompt_command() {
         if [ $? = 0 ]; then
-                PS1="\n${salmon}\u${salmon}@${salmon}\h${salmon} ${salmon}\w${lgtgrn}\n❯ ${txtrst}"
+                PS1="\n${salmon}\u${salmon}@${salmon}\h${salmon} ${salmon}\w${lgtgry}$(gitPrompt)${lgtgrn}\n❯ ${txtrst}"
         else
-                PS1="\n${salmon}\u${salmon}@${salmon}\h${salmon} ${salmon}\w${txtred}\n❯ ${txtrst}"
+                PS1="\n${salmon}\u${salmon}@${salmon}\h${salmon} ${salmon}\w${lgtgry}$(gitPrompt)${txtred}\n❯ ${txtrst}"
         fi
 }
 
