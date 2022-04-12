@@ -5,7 +5,7 @@
 
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE
-HISTFILE=~/.zsh_history
+HISTFILE=~/.bash_history
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
@@ -48,6 +48,7 @@ setopt HIST_VERIFY              # Don't execute immediately upon history expansi
 setopt PROMPTSUBST              # Parameter expansion, command substitution and arithmetic expansion are performed in prompts. Substitutions within prompts do not affect the command status.
 unsetopt MENU_COMPLETE          # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL           # Disable start/stop characters in shell editor.
+unsetopt EXTENDED_HISTORY       # Needed for bash+zsh history compatibility.
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
