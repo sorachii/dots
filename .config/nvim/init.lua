@@ -1,4 +1,5 @@
--- vim.cmd("set background=light")
+--o
+vim.cmd("set background=light")
 
 -- Install packer
 local execute = vim.api.nvim_command
@@ -35,6 +36,7 @@ require('packer').startup(function()
   -- use 'lewis6991/gitsigns.nvim'
   -- use 'sheerun/vim-polyglot'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
   use 'neovim/nvim-lspconfig'
   use {'ms-jpq/coq_nvim', branch = 'coq'}
   use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
@@ -46,7 +48,7 @@ require('packer').startup(function()
   -- Markdown plugins
   use 'godlygeek/tabular'
   use 'elzr/vim-json'
-  use 'plasticboy/vim-markdown'
+  -- use 'plasticboy/vim-markdown' -- buggy
 
   use {'folke/which-key.nvim', config = function()
     require("which-key").setup{ }
@@ -59,19 +61,31 @@ require('packer').startup(function()
 
   -- Aesthetic
   use 'eddyekofo94/gruvbox-flat.nvim'
-  use 'junegunn/seoul256.vim'
-  use ({'sainnhe/gruvbox-material',
-	  config = function()
-		vim.cmd('colorscheme gruvbox-material')
-	  end
-  })
+  use ({'junegunn/seoul256.vim', config = function()
+          vim.g.seoul256_background=256
+          vim.cmd('colorscheme seoul256')
+  end })
+  use 'jacoborus/tender.vim'
+  -- use({
+  --   'rose-pine/neovim',
+  --   as = 'rose-pine',
+  --   tag = 'v1.*',
+  --   config = function()
+  --       vim.cmd('colorscheme rose-pine-dawn')
+  --   end })
+
+  -- use ({'sainnhe/gruvbox-material',
+	  -- config = function()
+		-- vim.cmd('colorscheme gruvbox-material')
+	  -- end
+  -- })
 
   use 'ryanoasis/vim-devicons'
   use ({'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons',
 	config = function()
 		require('lualine').setup({
 			options = {
-				theme = 'gruvbox-material'
+				theme = 'solarized_light'
 			}
 		})
 	end})
@@ -80,7 +94,7 @@ end)
 -- Tab expansion
 vim.bo.expandtab = true
 vim.bo.tabstop = 4
-vim.bo.softtabstop = 4
+-- vim.bo.softtabstop = 4
 
 vim.o.scrolloff = 5
 vim.o.wrap = false
