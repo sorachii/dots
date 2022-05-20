@@ -40,6 +40,8 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use {'ms-jpq/coq_nvim', branch = 'coq'}
   use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
+  use {'ms-jpq/coq.thirdparty', branch = '3p' }
+
   use 'mfussenegger/nvim-jdtls' -- java lsp
   use 'nathom/filetype.nvim'
   use 'mhinz/vim-startify'
@@ -231,7 +233,7 @@ local on_attach = function(_client, bufnr)
 end
 
 -- Nvim LSP and COQ initialisation
-local servers = { 'pyright', 'tsserver', 'bashls' }
+local servers = { 'ansiblels', 'pyright', 'tsserver', 'bashls' }
 local coq = require "coq"
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({
