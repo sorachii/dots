@@ -49,13 +49,11 @@ require('packer').startup(function()
 
   -- Markdown plugins
   use 'godlygeek/tabular'
-  use 'elzr/vim-json'
   -- use 'plasticboy/vim-markdown' -- buggy
 
   use {'folke/which-key.nvim', config = function()
     require("which-key").setup{ }
   end }
-
 
   use {'lewis6991/impatient.nvim', config = function()
     require('impatient')
@@ -193,6 +191,9 @@ vim.api.nvim_set_keymap('n', '<leader>gp', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<c-j>', [[<cmd>cnext<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<c-k>', [[<cmd>cprev<cr>]], { noremap = true, silent = true})--interferes with lsp's signature_help binding otherwise nice
 vim.api.nvim_set_keymap('n', '<c-q>', [[<cmd>copen<cr>]], { noremap = true, silent = true})--should check if quickfix list is open, if so, ':q'
+
+--Vim-zoom like tmux <prefix>z
+vim.api.nvim_set_keymap('n', '<c-w>o', [[<cmd>tab split<cr>]], { noremap = true, silent = true})
 
 -- Change preview window location
 vim.g.splitbelow = true
