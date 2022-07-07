@@ -33,4 +33,11 @@ if [ -d "$HOME/.cargo/bin" ] ; then
     esac
 fi
 
+if [ -d "/usr/local/go/bin" ] ; then
+    PATH="/usr/local/go/bin:$PATH"
+    if [ -d "$HOME/go/bin" ]; then
+            PATH="$HOME/go/bin:$PATH"
+    fi
+fi
+
 export PATH=/usr/local/bin:$PATH
