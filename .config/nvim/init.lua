@@ -22,25 +22,27 @@ require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
   use 'tpope/vim-surround'
   use 'tpope/vim-rsi'
-  use 'tpope/vim-fugitive'
+  use {'tpope/vim-fugitive'} -- good commit = '9a4f1e9df2bb5ee474483ca36a73d419abdbe7f8'
   use 'tpope/vim-repeat'
   use 'tpope/vim-commentary'
   use 'mhinz/vim-signify'
   use 'junegunn/goyo.vim'
   use 'ludovicchabant/vim-gutentags'
-  use 'nvim-treesitter/playground'
   use {'kevinhwang91/nvim-bqf', ft = 'qf'}
   use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
-  use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate'}
+  use 'nvim-treesitter/playground'
+   use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate'}
   use 'justinmk/vim-dirvish'
   -- use 'lewis6991/gitsigns.nvim'
   -- use 'sheerun/vim-polyglot'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   use 'neovim/nvim-lspconfig'
-  use {'ms-jpq/coq_nvim', branch = 'coq'}
-  use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
-  use {'ms-jpq/coq.thirdparty', branch = '3p' }
+
+  -- for some reason coq keeps crashing nvim when I edit git commits and start the commit message with 'j'
+  use {'ms-jpq/coq_nvim', branch = 'coq', commit = '04d2da49'}
+  use {'ms-jpq/coq.artifacts', branch = 'artifacts', commit = '9363cb4'}
+  use {'ms-jpq/coq.thirdparty', branch = '3p', commit = 'b8c984c' }
 
   use 'mfussenegger/nvim-jdtls' -- java lsp
   use 'nathom/filetype.nvim'
@@ -135,14 +137,14 @@ vim.g.maplocalleader = " "
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true})
 vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true})
 
---Remap escape to leave terminal mode
-vim.api.nvim_exec([[
-  augroup Terminal
-    autocmd!
-    au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-    au TermOpen * set nonu
-  augroup end
-]], false)
+----Remap escape to leave terminal mode
+--vim.api.nvim_exec([[
+--  augroup Terminal
+--    autocmd!
+--    au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+--    au TermOpen * set nonu
+--  augroup end
+--]], false)
 
 --Add map to change background between light and dark
 vim.cmd[[nnoremap <expr><F3> &background == 'light' ? ':set bg=dark<cr>' : ':set bg=light<cr>']]
@@ -263,17 +265,3 @@ vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt="menuone,noinsert,noselect"
-
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = { "javascript" }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = {},  -- list of language that will be disabled
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-      -- Using this option may slow down your editor, and you may see some duplicate highlights.
-      -- Instead of true it can also be a list of languages
-      additional_vim_regex_highlighting = false,
-    },
-  }
