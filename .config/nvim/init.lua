@@ -19,55 +19,54 @@ vim.api.nvim_exec([[
 
 local use = require('packer').use
 require('packer').startup(function()
-  use {'wbthomason/packer.nvim', opt = true}
-  use 'tpope/vim-surround'
-  use 'tpope/vim-rsi'
-  use {'tpope/vim-fugitive'} -- good commit = '9a4f1e9df2bb5ee474483ca36a73d419abdbe7f8'
-  use 'tpope/vim-repeat'
-  use 'tpope/vim-commentary'
-  use 'mhinz/vim-signify'
-  use 'junegunn/goyo.vim'
-  use 'ludovicchabant/vim-gutentags'
-  use {'kevinhwang91/nvim-bqf', ft = 'qf'}
-  use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
-  use 'nvim-treesitter/playground'
-   use {'nvim-treesitter/nvim-treesitter', branch = '0.5-compat', run = ':TSUpdate'}
-  use 'justinmk/vim-dirvish'
+  use {'wbthomason/packer.nvim', opt = true, commit='494fd59' }
+  use { 'tpope/vim-surround', commit='bf3480d' }
+  use { 'tpope/vim-rsi', commit='4c673fb' }
+  use { 'tpope/vim-fugitive', commit='9a13fc8' }
+  use { 'tpope/vim-repeat', commit='24afe92' }
+  use { 'tpope/vim-commentary', commit='3654775' }
+  use { 'mhinz/vim-signify', commit='69498f6' }
+  use { 'ludovicchabant/vim-gutentags', commit='b77b8fa' }
+  use { 'kevinhwang91/nvim-bqf', ft = 'qf', commit='8b62211' }
+  use { 'nvim-telescope/telescope.nvim', commit='bb8db6e', requires = {{'nvim-lua/popup.nvim', commit='b7404d3'}, {'nvim-lua/plenary.nvim', commit='986ad71'}} }
+  use { 'nvim-treesitter/playground', commit='ce7e4b7' }
+  use { 'nvim-treesitter/nvim-treesitter', commit='47cfda2', branch = '0.5-compat', run = ':TSUpdate'}
+  use { 'justinmk/vim-dirvish', commit='81b4087' }
   -- use 'lewis6991/gitsigns.nvim'
   -- use 'sheerun/vim-polyglot'
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', commit='6a33ece' }
 
-  use 'neovim/nvim-lspconfig'
+  use { 'neovim/nvim-lspconfig', commit='3479473' }
 
   -- for some reason coq keeps crashing nvim when I edit git commits and start the commit message with 'j'
-  use {'ms-jpq/coq_nvim', branch = 'coq', commit = '04d2da49'}
-  use {'ms-jpq/coq.artifacts', branch = 'artifacts', commit = '9363cb4'}
-  use {'ms-jpq/coq.thirdparty', branch = '3p', commit = 'b8c984c' }
+  use { 'ms-jpq/coq_nvim', branch = 'coq', commit = '04d2da49'}
+  use { 'ms-jpq/coq.artifacts', branch = 'artifacts', commit = '9363cb4'}
+  use { 'ms-jpq/coq.thirdparty', branch = '3p', commit = 'b8c984c' }
 
-  use 'mfussenegger/nvim-jdtls' -- java lsp
-  use 'nathom/filetype.nvim'
-  use 'mhinz/vim-startify'
-  use 'ggandor/lightspeed.nvim'
+  use { 'mfussenegger/nvim-jdtls', commit='f35efb6'}
+  use { 'nathom/filetype.nvim', commit='b522628' }
+  use { 'mhinz/vim-startify', commit='81e36c3' }
+  use { 'ggandor/lightspeed.nvim', commit='a4b4277' }
 
   -- Markdown plugins
-  use 'godlygeek/tabular'
+  use { 'godlygeek/tabular', commit='339091a' }
   -- use 'plasticboy/vim-markdown' -- buggy
 
-  use {'folke/which-key.nvim', config = function()
+  use {'folke/which-key.nvim', commit='bd4411a', config = function()
     require("which-key").setup{ }
   end }
 
-  use {'lewis6991/impatient.nvim', config = function()
+  use { 'lewis6991/impatient.nvim', commit='2aa872d', config = function()
     require('impatient')
   end }
 
   -- Aesthetic
-  use 'eddyekofo94/gruvbox-flat.nvim'
-  use ({'junegunn/seoul256.vim', config = function()
+  use { 'eddyekofo94/gruvbox-flat.nvim', commit='756dbdd' }
+  use ({'junegunn/seoul256.vim', commit='8f3dd7d', config = function()
           vim.g.seoul256_background=256
           vim.cmd('colorscheme seoul256')
   end })
-  use 'jacoborus/tender.vim'
+  use { 'jacoborus/tender.vim', commit='7746453' }
   -- use({
   --   'rose-pine/neovim',
   --   as = 'rose-pine',
@@ -82,8 +81,8 @@ require('packer').startup(function()
 	  -- end
   -- })
 
-  use 'ryanoasis/vim-devicons'
-  use ({'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons',
+  use { 'ryanoasis/vim-devicons', commit='a225865' }
+  use ({'nvim-lualine/lualine.nvim', commit='8d956c1', requires = { 'kyazdani42/nvim-web-devicons', commit='2d02a56'},
 	config = function()
 		require('lualine').setup({
 			options = {
