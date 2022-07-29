@@ -3,7 +3,7 @@ HISTCONTROL=ignoredups:ignorespace
 HISTSIZE=100000
 HISTFILESIZE=2000000
 shopt -s histappend
-shopt -s starglob
+shopt -s globstar
 shopt -s extglob
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
