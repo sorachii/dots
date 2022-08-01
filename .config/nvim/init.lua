@@ -97,6 +97,7 @@ vim.bo.expandtab = true
 vim.bo.tabstop = 4
 -- vim.bo.softtabstop = 4
 
+vim.o.mouse = nil
 vim.o.scrolloff = 5
 vim.o.wrap = false
 
