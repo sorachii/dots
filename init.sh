@@ -68,7 +68,7 @@ else
 	printf "\e[1;34mBuilding Neovim from source.\e[0m\n"
 	git clone https://github.com/neovim/neovim.git ~/git/neovim
 	cd ~/git/neovim
-	git checkout stable
+	git checkout 8af3d641d # fix(grid): don't use utfc_ptr2char_len() when printing until NUL (#19456)
 	sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
 	sudo make install
 
