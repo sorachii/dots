@@ -67,13 +67,14 @@ require('packer').startup(function()
           vim.cmd('colorscheme seoul256')
   end })
   use { 'jacoborus/tender.vim', commit='7746453' }
-  -- use({
-  --   'rose-pine/neovim',
-  --   as = 'rose-pine',
-  --   tag = 'v1.*',
-  --   config = function()
-  --       vim.cmd('colorscheme rose-pine-dawn')
-  --   end })
+  use({
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    tag = 'v1.*',
+    -- config = function()
+    --     vim.cmd('colorscheme rose-pine-dawn')
+    -- end
+    })
 
   -- use ({'sainnhe/gruvbox-material',
 	  -- config = function()
@@ -157,17 +158,6 @@ vim.cmd[[nnoremap <expr><F3> &background == 'light' ? ':set bg=dark<cr>' : ':set
 --vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile', 'packer'}
 --vim.g.indent_blankline_char_highlight = 'LineNr'
 
-require('telescope').setup {
-  extensions = {
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = false, -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
-    }
-  }
-}
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
@@ -236,7 +226,7 @@ local on_attach = function(_client, bufnr)
 end
 
 -- Nvim LSP and COQ initialisation
-local servers = { 'ansiblels', 'pyright', 'tsserver', 'bashls' }
+local servers = { 'ansiblels', 'pyright', 'tsserver', 'bashls', 'gdscript' }
 local coq = require "coq"
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({
