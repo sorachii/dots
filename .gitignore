@@ -1,6 +1,6 @@
 # git config --global core.excludesfile ~/.gitignore
 $HOME/git/dots
-tags*
+tags
 *war
 
 .metadata

@@ -40,4 +40,4 @@ if [ -d "/usr/local/go/bin" ] ; then
     fi
 fi
 
-export PATH=/usr/local/bin:$PATH
+export PATH=~/.local/maven/bin:/usr/local/bin:$PATH

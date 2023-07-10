@@ -61,11 +61,26 @@ require('packer').startup(function()
   end }
 
   -- Aesthetic
+  use { 'mcchrish/zenbones.nvim', commit='74d4440', requires='rktjmp/lush.nvim' }
+  use { 'EdenEast/nightfox.nvim', commit='77aa745' }
+  use ({ 'romainl/flattened', commit='0f3e0e4',
+  	config = function()
+  		vim.cmd('colorscheme flattened_light')
+  	end })
+  use { 'ellisonleao/gruvbox.nvim', commit='df149bc' }
+  use { 'projekt0n/github-nvim-theme', commit='037f265' }
+  use { 'shaunsingh/seoul256.nvim', commit='726f88a' }
+  use { 'Shatur/neovim-ayu', commit='762ff24' }
+  use { 'sainnhe/sonokai', commit='a9b2a3e' }
+  use { 'nyoom-engineering/oxocarbon.nvim', commit='ee9182c' }
+  use { 'catppuccin/nvim', as = 'catppuccin', commit='1d3eda1' }
+  use { 'folke/tokyonight.nvim', commit='90b711c' }
+  use { 'rebelot/kanagawa.nvim', commit='14a7524' }
   use { 'eddyekofo94/gruvbox-flat.nvim', commit='756dbdd' }
-  use ({'junegunn/seoul256.vim', commit='8f3dd7d', config = function()
-          vim.g.seoul256_background=256
-          vim.cmd('colorscheme seoul256')
-  end })
+  -- use ({'junegunn/seoul256.vim', commit='8f3dd7d', config = function()
+  --         vim.g.seoul256_background=256
+  --         vim.cmd('colorscheme seoul256')
+  -- end })
   use { 'jacoborus/tender.vim', commit='7746453' }
   use({
     'rose-pine/neovim',
