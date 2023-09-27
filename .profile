@@ -40,4 +40,10 @@ if [ -d "/usr/local/go/bin" ] ; then
     fi
 fi
 
-export PATH=~/.local/maven/bin:/usr/local/bin:$PATH
+if [ -e "$HOME/.pyenv" ] ; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    command -v pyenv >/dev/null || PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
+export PATH=~/n/bin:~/.local/maven/bin:/usr/local/bin:$PATH
+eval "$(pyenv init -)"
