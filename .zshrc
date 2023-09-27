@@ -108,3 +108,5 @@ bindkey '^Xe' edit-command-line
 
 # printf "Time last: $((($(date +%s%N) - ZSH_INIT_TIME) / 1000000)) ms\n"
 # unset ZSH_INIT_TIME ZSH_LOADED_TIME ZSH_STARTUP_TIME
+
+# export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
