@@ -25,6 +25,10 @@ vim.o.smartcase = true
 --Decrease update time
 vim.o.updatetime = 50
 
+-- Plug(sneak predecessor) mappings
+vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+vim.keymap.set('n',             'S', '<Plug>(leap-from-window)')
+
 -- Pretty colors
 vim.o.termguicolors = true
 
@@ -53,13 +57,6 @@ vim.api.nvim_set_keymap('n', '<c-w>o', [[<cmd>tab split<cr>]], { noremap = true,
 
 -- Y yank until the end of line
 vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true})
-
-vim.api.nvim_exec([[
-  augroup jdtls_lsp
-  autocmd!
-  autocmd FileType java lua require'jdtls_setup'.setup()
-augroup end
-]], false)
 
 -- Set buffer switching keymaps
 vim.api.nvim_set_keymap('n', '<C-n>', '<cmd>bn<cr>', { noremap = true, silent = true})

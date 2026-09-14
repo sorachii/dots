@@ -8,33 +8,6 @@ function M.setup()
       -- require'lspkind'.init()
       -- require'lspsaga'.init_lsp_saga()
 
-      require'compe'.setup {
-          enabled = true;
-          autocomplete = true;
-          debug = false;
-          min_length = 1;
-          preselect = 'enable';
-          throttle_time = 80;
-          source_timeout = 200;
-          incomplete_delay = 400;
-          max_abbr_width = 100;
-          max_kind_width = 100;
-          max_menu_width = 100;
-          documentation = true;
-
-          source = {
-            path = true;
-            buffer = true;
-            calc = true;
-            vsnip = false;
-            nvim_lsp = true;
-            nvim_lua = true;
-            spell = true;
-            tags = true;
-            snippets_nvim = false;
-            treesitter = true;
-          };
-        }
 
       -- Kommentary
       -- vim.api.nvim_set_keymap("n", "<leader>/", "<plug>kommentary_line_default", {})
@@ -85,7 +58,7 @@ function M.setup()
       buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
       buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
       -- Java specific
-      
+
       buf_set_keymap("n", "<leader>dca", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
       buf_set_keymap("n", "<leader>doi", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
       buf_set_keymap("n", "<leader>dtc", "<Cmd>lua require'jdtls'.test_class()<CR>", opts)
@@ -109,8 +82,7 @@ function M.setup()
 
     end
 
-    local root_markers = {'gradlew', 'pom.xml'}
-    local root_dir = require('jdtls.setup').find_root(root_markers)
+    local root_dir = require('jdtls.setup')
     local home = os.getenv('HOME')
 
     local capabilities = {

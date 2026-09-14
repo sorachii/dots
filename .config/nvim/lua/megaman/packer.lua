@@ -1,4 +1,4 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+-- This file can be loaded by calling `lua require('plugins')` from yo ur init.vim
 
 -- Only required if you have packer configured as `opt`
 vim.cmd.packadd('packer.nvim')
@@ -16,45 +16,24 @@ return require('packer').startup(function(use)
 	use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
 	use { 'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
 	use { 'nvim-treesitter/playground' }
+
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = function()
 			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
 			ts_update()
-		end,}
+		end}
 
-	use { 'justinmk/vim-dirvish' }
-	-- use 'lewis6991/gitsigns.nvim'
-	-- use 'sheerun/vim-polyglot'
-	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-	use {
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v2.x',
-		requires = {
-			-- LSP Support
-			{'neovim/nvim-lspconfig'},
-			{'williamboman/mason.nvim'},
-			{'williamboman/mason-lspconfig.nvim'},
 
-			-- Autocompletion
-			{'hrsh7th/nvim-cmp'},
-			{'hrsh7th/cmp-buffer'},
-			{'hrsh7th/cmp-path'},
-			{'saadparwaiz1/cmp_luasnip'},
-			{'hrsh7th/cmp-nvim-lsp'},
-			{'hrsh7th/cmp-nvim-lua'},
-
-			-- Snippets
-			{ 'L3MON4D3/LuaSnip' },
-			{'rafamadriz/friendly-snippets'},
-		}
-	}
+                use { 'https://codeberg.org/andyg/leap.nvim' }
+                use { 'justinmk/vim-dirvish' }
+                -- use 'lewis6991/gitsigns.nvim'
+                -- use 'sheerun/vim-polyglot'
+                use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
 	-- use { 'mfussenegger/nvim-jdtls'}
+	use { 'arouene/vim-ansible-vault' }
 	use { 'mhinz/vim-startify' }
-
-	-- use { 'ggandor/lightspeed.nvim' }
-	use { 'ggandor/leap.nvim' }
 
 	-- Markdown plugins
 	-- use { 'godlygeek/tabular' }
@@ -65,12 +44,12 @@ return require('packer').startup(function(use)
 	end }
 
 	-- Aesthetic
-	use { 'mcchrish/zenbones.nvim', requires='rktjmp/lush.nvim' }
+	use ({ 'mcchrish/zenbones.nvim', requires='rktjmp/lush.nvim',
+                config = function()
+                vim.cmd('colorscheme forestbones')
+            end })
 	use { 'EdenEast/nightfox.nvim' }
-	use ({ 'romainl/flattened',
-		config = function()
-		vim.cmd('colorscheme flattened_light')
-	end })
+	use ({ 'romainl/flattened'})
 	use { 'ellisonleao/gruvbox.nvim' }
 	use { 'projekt0n/github-nvim-theme' }
 	use { 'shaunsingh/seoul256.nvim' }
@@ -95,10 +74,10 @@ return require('packer').startup(function(use)
 		-- end
 	})
 
-	use ({'sainnhe/gruvbox-material',
-		config = function()
-		vim.cmd('colorscheme gruvbox-material')
-	end })
+	-- use ({'sainnhe/gruvbox-material',
+	-- 	config = function()
+	-- 	vim.cmd('colorscheme gruvbox-material')
+	-- end })
 
 	use { 'ryanoasis/vim-devicons' }
 	use ({'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons'},
