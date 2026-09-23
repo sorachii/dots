@@ -6,6 +6,7 @@ alias ipb="ip -brief address"
 alias ll="ls -lh"
 alias l="ls -latrh"
 alias v="$EDITOR"
+alias m="NVIM_APPNAME=nvim-mac nvim"
 
 # config aliases
 alias config='/usr/bin/git --git-dir=$HOME/git/dots/.git --work-tree=$HOME'
